@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import {
   GridstackContainer,
-  GridstackSubgrid,
   GridstackItem,
 } from "./gridstack";
 import DummyWidget from "./DummyWidget.jsx";

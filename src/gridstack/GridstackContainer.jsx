@@ -7,15 +7,15 @@ export default function GridstackLayout(props) {
     const grid = GridStack.init();
     grid.on("added change", (event, items) => {
       for (const item in items) {
-        const { w, y, x, id } = item;
+        const { w, y, h, x, id } = item;
         props.layout.setLayout((oldLayout) => {
           return oldLayout.map((widget) => {
-            if (widget.id == id) {
+            if (widget.id === id) {
               Object.assign(widget, {
                 w,
                 y,
                 x,
-                y,
+                h,
               });
             }
             console.log(widget);
@@ -36,7 +36,7 @@ export default function GridstackLayout(props) {
       // perform cleanup here if necessary
       console.log("Component unmounted!");
     };
-  }, []); // empty dependency array to ensure it only runs once
+  }, [init]); // empty dependency array to ensure it only runs once
 
   return <div className="grid-stack">{props.children}</div>;
 }

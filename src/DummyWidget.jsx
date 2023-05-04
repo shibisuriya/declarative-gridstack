@@ -1,4 +1,5 @@
 import React from "react";
-export default function (props) {
+function DummyWidget(props) {
   return <div>{props.data}</div>;
 }
+export default DummyWidget;
