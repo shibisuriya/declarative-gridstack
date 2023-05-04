@@ -1,9 +1,9 @@
 import './App.css';
-import Example from './Example.jsx'
+// import Example from './Example.jsx'
 
 function App() {
   return (
-    <Example></Example>
+    <h1>hello</h1>
   );
 }
 
