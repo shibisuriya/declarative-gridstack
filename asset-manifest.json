@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/react-gridstack/static/css/main.00406932.css",
-    "main.js": "/react-gridstack/static/js/main.769ab1bd.js",
+    "main.css": "/react-gridstack/static/css/main.832e8570.css",
+    "main.js": "/react-gridstack/static/js/main.0f161206.js",
     "static/js/787.53378dac.chunk.js": "/react-gridstack/static/js/787.53378dac.chunk.js",
     "index.html": "/react-gridstack/index.html",
-    "main.00406932.css.map": "/react-gridstack/static/css/main.00406932.css.map",
-    "main.769ab1bd.js.map": "/react-gridstack/static/js/main.769ab1bd.js.map",
+    "main.832e8570.css.map": "/react-gridstack/static/css/main.832e8570.css.map",
+    "main.0f161206.js.map": "/react-gridstack/static/js/main.0f161206.js.map",
     "787.53378dac.chunk.js.map": "/react-gridstack/static/js/787.53378dac.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.00406932.css",
-    "static/js/main.769ab1bd.js"
+    "static/css/main.832e8570.css",
+    "static/js/main.0f161206.js"
   ]
 }
