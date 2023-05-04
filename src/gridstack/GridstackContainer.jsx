@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import "gridstack/dist/gridstack.min.css";
 import { GridStack } from "gridstack";
 export default function GridstackLayout(props) {
   console.log("layout -> ", props.layout);
-  const init = () => {
+
+  const init = useCallback(() => {
     const grid = GridStack.init();
     grid.on("added change", (event, items) => {
       for (const item in items) {
@@ -24,7 +25,8 @@ export default function GridstackLayout(props) {
         });
       }
     });
-  };
+  }, [props.layout]);
+
   useEffect(() => {
     // perform initialization or setup here
     console.log("Component mounted!");
