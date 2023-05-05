@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/react-gridstack/static/css/main.832e8570.css",
-    "main.js": "/react-gridstack/static/js/main.123a4a13.js",
-    "static/js/787.e2d40f42.chunk.js": "/react-gridstack/static/js/787.e2d40f42.chunk.js",
-    "index.html": "/react-gridstack/index.html",
-    "main.832e8570.css.map": "/react-gridstack/static/css/main.832e8570.css.map",
-    "main.123a4a13.js.map": "/react-gridstack/static/js/main.123a4a13.js.map",
-    "787.e2d40f42.chunk.js.map": "/react-gridstack/static/js/787.e2d40f42.chunk.js.map"
+    "main.css": "/reactified-gridstack/static/css/main.832e8570.css",
+    "main.js": "/reactified-gridstack/static/js/main.33c61324.js",
+    "static/js/787.e2d40f42.chunk.js": "/reactified-gridstack/static/js/787.e2d40f42.chunk.js",
+    "index.html": "/reactified-gridstack/index.html",
+    "main.832e8570.css.map": "/reactified-gridstack/static/css/main.832e8570.css.map",
+    "main.33c61324.js.map": "/reactified-gridstack/static/js/main.33c61324.js.map",
+    "787.e2d40f42.chunk.js.map": "/reactified-gridstack/static/js/787.e2d40f42.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.832e8570.css",
-    "static/js/main.123a4a13.js"
+    "static/js/main.33c61324.js"
   ]
 }
