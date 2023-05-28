@@ -1,8 +1,8 @@
 import "./App.css";
-import Example from "./Example.jsx";
+import Dev from "./Dev.jsx";
 
 function App() {
-  return <Example></Example>;
+  return <Dev></Dev>;
 }
 
 export default App;

@@ -1,44 +1,39 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 import "gridstack/dist/gridstack.min.css";
 import { GridStack } from "gridstack";
 export default function GridstackLayout(props) {
-  console.log("layout -> ", props.layout);
+  let grid;
 
-  const init = useCallback(() => {
-    const grid = GridStack.init();
+  const attachEventListeners = () => {
     grid.on("added change", (event, items) => {
-      for (const item in items) {
-        const { w, y, h, x, id } = item;
-        props.layout.setLayout((oldLayout) => {
-          return oldLayout.map((widget) => {
-            if (widget.id === id) {
-              Object.assign(widget, {
-                w,
-                y,
-                x,
-                h,
-              });
+      const { setLayout } = props;
+      for (const item of items) {
+        const { x, y, w, h, id } = item;
+        setLayout((prevLayout) => {
+          return prevLayout.map((item) => {
+            if (item.id === id) {
+              item = { ...item, x, y, w, h };
             }
-            console.log(widget);
-            return widget;
+            return item;
           });
         });
       }
     });
-  }, [props.layout]);
+  };
+
+  const init = () => {
+    grid = GridStack.init();
+    attachEventListeners();
+  };
 
   useEffect(() => {
-    // perform initialization or setup here
-    console.log("Component mounted!");
-
     init();
-
-    // return a cleanup function if necessary
     return () => {
-      // perform cleanup here if necessary
-      console.log("Component unmounted!");
+      grid.destory();
     };
-  }, [init]); // empty dependency array to ensure it only runs once
+  }, []);
 
-  return <div className="grid-stack">{props.children}</div>;
+  const { children } = props;
+
+  return <div className="grid-stack">{children}</div>;
 }
