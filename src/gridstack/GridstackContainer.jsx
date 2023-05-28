@@ -31,6 +31,7 @@ export default function GridstackLayout(props) {
     return () => {
       grid.destory();
     };
+    // eslint-disable-next-line
   }, []);
 
   const { children } = props;
