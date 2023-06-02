@@ -1,16 +1,32 @@
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
+import { GridStack } from "gridstack";
+import { SubgridContext } from "./contexts";
 
-export default function GridstackLayout() {
+function GridstackSubgrid(props) {
+  const [mountSubgrid, setMountSubgrid] = useState(false);
+  const [mountChildren, setMountChildren] = useState(false);
+  const subgridRef = useRef();
+  const subgrid = useRef();
   useEffect(() => {
-    // perform initialization or setup here
-    console.log("Component mounted!");
-
-    // return a cleanup function if necessary
-    return () => {
-      // perform cleanup here if necessary
-      console.log("Component unmounted!");
-    };
-  }, []); // empty dependency array to ensure it only runs once
-
-  return <div>Hello</div>;
+    if (!mountSubgrid) {
+      setMountSubgrid(true);
+    } else {
+      subgrid.current = GridStack.addGrid(subgridRef.current);
+      setMountChildren(true);
+    }
+  }, [mountSubgrid]);
+  const { children } = props;
+  return (
+    <Fragment>
+      <SubgridContext.Provider value={subgrid.current}>
+        {
+          <div className="grid-stack" ref={subgridRef}>
+            {mountChildren && children}
+          </div>
+        }
+      </SubgridContext.Provider>
+    </Fragment>
+  );
 }
+
+export default GridstackSubgrid;

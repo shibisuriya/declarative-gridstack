@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { GridstackContainer, GridstackItem } from "./gridstack";
+import {
+  GridstackContainer,
+  GridstackItem,
+  GridstackSubgrid,
+} from "./gridstack";
 import { MapWidget, CalendarWidget } from "./components/widgets";
 
-export default function Example() {
+function Dev() {
   const [layout, setLayout] = useState([
     {
       id: "1",
@@ -16,13 +20,34 @@ export default function Example() {
       id: "2",
       x: 1,
       y: 1,
-      w: 2,
-      h: 2,
-      data: {
-        type: "map",
-        title: "A map widget",
-        data: "Chennai, Tamil Nadu, India",
-      },
+      w: 6,
+      h: 3,
+      children: [
+        {
+          id: "3",
+          x: 1,
+          y: 1,
+          w: 1,
+          h: 1,
+          data: {
+            type: "map",
+            title: "A map widget",
+            data: "Chennai, Tamil Nadu, India",
+          },
+        },
+        {
+          id: "4",
+          x: 1,
+          y: 1,
+          w: 1,
+          h: 1,
+          data: {
+            type: "map",
+            title: "A map widget",
+            data: "Chennai, Tamil Nadu, India",
+          },
+        },
+      ],
     },
   ]);
 
@@ -36,6 +61,34 @@ export default function Example() {
   const widgetStyles = {
     border: "1px solid red",
     margin: "10px",
+  };
+
+  const getWidget = (type, data) => {
+    if (type === "calendar") {
+      return <CalendarWidget data={data} />;
+    } else if (type === "map") {
+      return <MapWidget data={data} />;
+    }
+  };
+
+  const getItem = (item) => {
+    const {
+      data,
+      data: { type },
+    } = item ?? {};
+    const widget = getWidget(type, data);
+    return (
+      <GridstackItem
+        key={item.id}
+        id={item.id}
+        x={item.x}
+        y={item.y}
+        w={item.w}
+        h={item.h}
+      >
+        {widget}
+      </GridstackItem>
+    );
   };
 
   return (
@@ -53,32 +106,31 @@ export default function Example() {
       })}
       <GridstackContainer setLayout={setLayout}>
         {layout.map((item) => {
-          const {
-            data,
-            data: { type },
-          } = item ?? {};
-          const getWidget = () => {
-            if (type === "calendar") {
-              return <CalendarWidget data={data} />;
-            } else if (item.data.type === "map") {
-              return <MapWidget data={data} />;
-            }
-          };
-          const widget = getWidget();
-          return (
-            <GridstackItem
-              key={item.id}
-              id={item.id}
-              x={item.x}
-              y={item.y}
-              w={item.w}
-              h={item.h}
-            >
-              {widget}
-            </GridstackItem>
-          );
+          if ("children" in item) {
+            // is a subgrid!
+            const { children } = item;
+            return (
+              <GridstackItem
+                key={item.id}
+                id={item.id}
+                x={item.x}
+                y={item.y}
+                w={item.w}
+                h={item.h}
+              >
+                <GridstackSubgrid items={children} key={item.id}>
+                  {children.map((child) => {
+                    return getItem(child);
+                  })}
+                </GridstackSubgrid>
+              </GridstackItem>
+            );
+          } else {
+            return getItem(item);
+          }
         })}
       </GridstackContainer>
     </div>
   );
 }
+export default Dev;

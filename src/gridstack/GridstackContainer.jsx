@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect, useRef } from "react";
 import "gridstack/dist/gridstack.min.css";
 import { GridStack } from "gridstack";
+import { MasterGridContext } from "./contexts";
 export default function GridstackLayout(props) {
-  let grid;
+  const grid = useRef();
+  const gridContainerElement = useRef();
 
   const attachEventListeners = () => {
-    grid.on("added change", (event, items) => {
+    grid.current.on("added change", (event, items) => {
       const { setLayout } = props;
       for (const item of items) {
         const { x, y, w, h, id } = item;
@@ -22,19 +24,27 @@ export default function GridstackLayout(props) {
   };
 
   const init = () => {
-    grid = GridStack.init();
+    grid.current = GridStack.init(gridContainerElement.current);
     attachEventListeners();
   };
 
   useEffect(() => {
     init();
     return () => {
-      grid.destory();
+      grid.current.destory();
     };
     // eslint-disable-next-line
   }, []);
 
   const { children } = props;
 
-  return <div className="grid-stack">{children}</div>;
+  return (
+    <Fragment>
+      <MasterGridContext.Provider value={grid}>
+        <div className="grid-stack" ref={gridContainerElement}>
+          {children}
+        </div>
+      </MasterGridContext.Provider>
+    </Fragment>
+  );
 }
