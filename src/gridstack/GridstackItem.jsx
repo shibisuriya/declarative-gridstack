@@ -28,6 +28,7 @@ export default function GridstackItem(props) {
       }
     }
     return () => {};
+    // eslint-disable-next-line
   }, [itemMounted]);
 
   // Copy the props which should not be mutated by the user, when the user changes a prop after the gs-item has
