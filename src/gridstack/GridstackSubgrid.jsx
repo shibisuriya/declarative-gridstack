@@ -31,6 +31,7 @@ function GridstackSubgrid(props) {
       attachEventListeners();
       setMountChildren(true);
     }
+    // eslint-disable-next-line
   }, [mountSubgrid]);
   const { children } = props;
   return (

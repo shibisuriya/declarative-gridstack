@@ -67,10 +67,10 @@ function Dev() {
     };
   }, []); // empty dependency array to ensure it only runs once
 
-  const widgetStyles = {
-    border: "1px solid red",
-    margin: "10px",
-  };
+  // const widgetStyles = {
+  //   border: "1px solid red",
+  //   margin: "10px",
+  // };
 
   const getWidget = (type, data) => {
     if (type === "calendar") {
