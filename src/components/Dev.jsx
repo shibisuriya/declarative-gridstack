@@ -69,6 +69,7 @@ function Dev() {
       // perform cleanup here if necessary
       console.log("Dev.jsx will unmount!");
     };
+    // eslint-disable-next-line
   }, [layout]); // empty dependency array to ensure it only runs once
 
   // const widgetStyles = {
