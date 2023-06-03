@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { JsonView, darkStyles } from "react-json-view-lite";
+import "react-json-view-lite/dist/index.css";
 import {
   GridstackContainer,
   GridstackItem,
   GridstackSubgrid,
-} from "./gridstack";
-import { MapWidget, CalendarWidget } from "./components/widgets";
+} from "../gridstack";
+import { MapWidget, CalendarWidget } from "./widgets";
+import styles from "./styles.module.css";
 
 function Dev() {
   const savedLayout = JSON.parse(localStorage.getItem("layout"));
-  debugger;
   const [layout, setLayout] = useState(
     savedLayout ?? [
       {
@@ -109,39 +110,43 @@ function Dev() {
   };
 
   return (
-    <div>
-      <JsonView data={layout} style={darkStyles} />
-      <GridstackContainer
-        setLayout={setLayout}
-        columns={2}
-        rowHeight={100}
-        layoutChanged={layoutChanged}
-      >
-        {layout.map((item) => {
-          if ("children" in item) {
-            // is a subgrid!
-            const { children } = item;
-            return (
-              <GridstackItem
-                key={item.id}
-                id={item.id}
-                x={item.x}
-                y={item.y}
-                w={item.w}
-                h={item.h}
-              >
-                <GridstackSubgrid items={children} key={item.id}>
-                  {children.map((child) => {
-                    return getItem(child);
-                  })}
-                </GridstackSubgrid>
-              </GridstackItem>
-            );
-          } else {
-            return getItem(item);
-          }
-        })}
-      </GridstackContainer>
+    <div className={styles["container"]}>
+      <div className={styles["gs-container"]}>
+        <GridstackContainer
+          setLayout={setLayout}
+          columns={11}
+          rowHeight={100}
+          layoutChanged={layoutChanged}
+        >
+          {layout.map((item) => {
+            if ("children" in item) {
+              // is a subgrid!
+              const { children } = item;
+              return (
+                <GridstackItem
+                  key={item.id}
+                  id={item.id}
+                  x={item.x}
+                  y={item.y}
+                  w={item.w}
+                  h={item.h}
+                >
+                  <GridstackSubgrid items={children} key={item.id}>
+                    {children.map((child) => {
+                      return getItem(child);
+                    })}
+                  </GridstackSubgrid>
+                </GridstackItem>
+              );
+            } else {
+              return getItem(item);
+            }
+          })}
+        </GridstackContainer>
+      </div>
+      <div className={styles["json-viewer"]}>
+        <JsonView data={layout} style={darkStyles} />
+      </div>
     </div>
   );
 }

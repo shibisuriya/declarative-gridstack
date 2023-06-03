@@ -1,0 +1,13 @@
+.title {
+  text-align: center;
+  text-decoration: underline;
+}
+.text-data {
+  text-align: center;
+}
+.widget {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 30px);
+}

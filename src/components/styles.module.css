@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  align-items: flex-start;
+}
+.json-viewer {
+  width: 40%;
+}
+.gs-container {
+  width: 80%;
+}
