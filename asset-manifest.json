@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/reactified-gridstack/static/css/main.832e8570.css",
-    "main.js": "/reactified-gridstack/static/js/main.aa63e998.js",
+    "main.css": "/reactified-gridstack/static/css/main.0566bf19.css",
+    "main.js": "/reactified-gridstack/static/js/main.d0bdaa84.js",
     "static/js/787.e2d40f42.chunk.js": "/reactified-gridstack/static/js/787.e2d40f42.chunk.js",
     "index.html": "/reactified-gridstack/index.html",
-    "main.832e8570.css.map": "/reactified-gridstack/static/css/main.832e8570.css.map",
-    "main.aa63e998.js.map": "/reactified-gridstack/static/js/main.aa63e998.js.map",
+    "main.0566bf19.css.map": "/reactified-gridstack/static/css/main.0566bf19.css.map",
+    "main.d0bdaa84.js.map": "/reactified-gridstack/static/js/main.d0bdaa84.js.map",
     "787.e2d40f42.chunk.js.map": "/reactified-gridstack/static/js/787.e2d40f42.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.832e8570.css",
-    "static/js/main.aa63e998.js"
+    "static/css/main.0566bf19.css",
+    "static/js/main.d0bdaa84.js"
   ]
 }
