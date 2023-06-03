@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { JsonView, darkStyles } from "react-json-view-lite";
 import {
   GridstackContainer,
   GridstackItem,
@@ -7,49 +8,57 @@ import {
 import { MapWidget, CalendarWidget } from "./components/widgets";
 
 function Dev() {
-  const [layout, setLayout] = useState([
-    {
-      id: "1",
-      x: 1,
-      y: 1,
-      w: 2,
-      h: 2,
-      data: { type: "calendar", title: "A calendar widget", data: Date.now() },
-    },
-    {
-      id: "2",
-      x: 1,
-      y: 1,
-      w: 6,
-      h: 3,
-      children: [
-        {
-          id: "3",
-          x: 1,
-          y: 1,
-          w: 1,
-          h: 1,
-          data: {
-            type: "map",
-            title: "A map widget",
-            data: "Chennai, Tamil Nadu, India",
-          },
+  const savedLayout = JSON.parse(localStorage.getItem("layout"));
+  debugger;
+  const [layout, setLayout] = useState(
+    savedLayout ?? [
+      {
+        id: "1",
+        x: 1,
+        y: 1,
+        w: 2,
+        h: 2,
+        data: {
+          type: "calendar",
+          title: "A calendar widget",
+          data: Date.now(),
         },
-        {
-          id: "4",
-          x: 1,
-          y: 1,
-          w: 1,
-          h: 1,
-          data: {
-            type: "map",
-            title: "A map widget",
-            data: "Chennai, Tamil Nadu, India",
+      },
+      {
+        id: "2",
+        x: 1,
+        y: 1,
+        w: 6,
+        h: 3,
+        children: [
+          {
+            id: "3",
+            x: 1,
+            y: 1,
+            w: 1,
+            h: 1,
+            data: {
+              type: "map",
+              title: "A map widget",
+              data: "Chennai, Tamil Nadu, India",
+            },
           },
-        },
-      ],
-    },
-  ]);
+          {
+            id: "4",
+            x: 1,
+            y: 1,
+            w: 1,
+            h: 1,
+            data: {
+              type: "map",
+              title: "A map widget",
+              data: "Chennai, Tamil Nadu, India",
+            },
+          },
+        ],
+      },
+    ]
+  );
 
   useEffect(() => {
     return () => {
@@ -91,20 +100,23 @@ function Dev() {
     );
   };
 
+  const layoutChanged = () => {
+    console.log("layout changed -> ", Date.now());
+    console.log("layout -> ", layout);
+    setTimeout(() => {
+      localStorage.setItem("layout", JSON.stringify(layout));
+    }, 0);
+  };
+
   return (
     <div>
-      {layout.map((item) => {
-        return (
-          <div style={widgetStyles} key={item.id}>
-            <div>id: {item.id}</div>
-            <div>x: {item.x}</div>
-            <div>y: {item.y}</div>
-            <div>w: {item.w}</div>
-            <div>h: {item.h}</div>
-          </div>
-        );
-      })}
-      <GridstackContainer setLayout={setLayout}>
+      <JsonView data={layout} style={darkStyles} />
+      <GridstackContainer
+        setLayout={setLayout}
+        columns={2}
+        rowHeight={100}
+        layoutChanged={layoutChanged}
+      >
         {layout.map((item) => {
           if ("children" in item) {
             // is a subgrid!

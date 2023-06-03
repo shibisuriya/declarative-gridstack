@@ -1,17 +1,34 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, {
+  Fragment,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { GridStack } from "gridstack";
-import { SubgridContext } from "./contexts";
+import { SubgridContext, UpdateLayoutContext } from "./contexts";
+import getGridOptions from "./utils/getGridOptions";
 
 function GridstackSubgrid(props) {
   const [mountSubgrid, setMountSubgrid] = useState(false);
   const [mountChildren, setMountChildren] = useState(false);
   const subgridRef = useRef();
   const subgrid = useRef();
+  const subgridOptions = getGridOptions(props);
+  const updateLayout = useContext(UpdateLayoutContext);
+  // const {} = props;
+  // const subgridOptions = {};
+  const attachEventListeners = () => {
+    subgrid.current.on("added change", (event, items) => {
+      updateLayout(items);
+    });
+  };
   useEffect(() => {
     if (!mountSubgrid) {
       setMountSubgrid(true);
     } else {
-      subgrid.current = GridStack.addGrid(subgridRef.current);
+      subgrid.current = GridStack.addGrid(subgridRef.current, subgridOptions);
+      attachEventListeners();
       setMountChildren(true);
     }
   }, [mountSubgrid]);
