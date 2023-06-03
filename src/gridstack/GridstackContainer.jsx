@@ -26,9 +26,6 @@ export default function GridstackLayout(props) {
         return getUpdatedLayout(prevLayout, item);
       });
     }
-    setTimeout(() => {
-      props.layoutChanged();
-    }, 100);
   };
 
   const init = () => {

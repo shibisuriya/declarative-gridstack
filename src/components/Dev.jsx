@@ -64,11 +64,12 @@ function Dev() {
     useState(true);
 
   useEffect(() => {
+    layoutChanged();
     return () => {
       // perform cleanup here if necessary
-      console.log("Component unmounted!");
+      console.log("Dev.jsx will unmount!");
     };
-  }, []); // empty dependency array to ensure it only runs once
+  }, [layout]); // empty dependency array to ensure it only runs once
 
   // const widgetStyles = {
   //   border: "1px solid red",
@@ -104,11 +105,7 @@ function Dev() {
   };
 
   const layoutChanged = () => {
-    console.log("layout changed -> ", Date.now());
-    console.log("layout -> ", layout);
-    setTimeout(() => {
-      localStorage.setItem("layout", JSON.stringify(layout));
-    }, 0);
+    localStorage.setItem("layout", JSON.stringify(layout));
   };
 
   const showHideGridstackContainer = () => {
@@ -121,7 +118,7 @@ function Dev() {
         {gridstackContainerVisibility && (
           <GridstackContainer
             setLayout={setLayout}
-            columns={11}
+            columns={2}
             rowHeight={100}
             layoutChanged={layoutChanged}
           >
@@ -156,6 +153,7 @@ function Dev() {
         <button onClick={showHideGridstackContainer}>
           Show / Hide Gridstack Container
         </button>
+        <button onClick={() => console.log(layout)}>console.log(layout)</button>
       </div>
       <div className={styles["json-viewer"]}>
         <JsonView data={layout} style={darkStyles} />
