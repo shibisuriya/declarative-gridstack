@@ -9,6 +9,8 @@ const getGridOptions = (props = {}) => {
     singleColumnModeMinW = defaultOptions.singleColumnModeMinW,
     rowHeight = defaultOptions.rowHeight,
   } = props ?? {};
+  // cloneDeep so that the user is not able to change the props ones supplied to the
+  // grid.
   return cloneDeep({
     margin,
     disableOneColumnMode: !singleColumnMode,

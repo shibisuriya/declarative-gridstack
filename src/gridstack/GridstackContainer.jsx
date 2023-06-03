@@ -1,19 +1,18 @@
-import React, { Fragment, useEffect, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "gridstack/dist/gridstack-extra.min.css";
 import "gridstack/dist/gridstack.min.css";
 import { GridStack } from "gridstack";
 import getUpdatedLayout from "./utils/getUpdatedLayout";
-import {
-  MasterGridContext,
-  MasterGridOptionsContext,
-  UpdateLayoutContext,
-} from "./contexts";
+import { MasterGridContext, UpdateLayoutContext } from "./contexts";
 import getGridOptions from "./utils/getGridOptions.js";
 
 export default function GridstackLayout(props) {
   const grid = useRef();
   const gridContainerElement = useRef();
   const masterGridOptions = getGridOptions(props);
+
+  const [areChildrenMounted, setAreChildrenMounted] = useState(false);
+
   const attachEventListeners = () => {
     grid.current.on("added change", (event, items) => {
       updateLayout(items);
@@ -28,34 +27,33 @@ export default function GridstackLayout(props) {
     }
   };
 
-  const init = () => {
-    grid.current = GridStack.init(
-      masterGridOptions,
-      gridContainerElement.current
-    );
-    attachEventListeners();
-  };
-
   useEffect(() => {
-    init();
+    if (!areChildrenMounted) {
+      grid.current = GridStack.init(
+        masterGridOptions,
+        gridContainerElement.current
+      );
+      attachEventListeners();
+      setAreChildrenMounted(true);
+    } else {
+      throw new Error(
+        "Fatal error: Must not initialize Gridstack instance multiple times."
+      );
+    }
     return () => {
-      grid.current.destroy();
+      grid.current.destroy(); // Doesn't work!
     };
     // eslint-disable-next-line
   }, []);
 
   const { setLayout, children } = props;
   return (
-    <Fragment>
-      <MasterGridContext.Provider value={grid}>
-        <MasterGridOptionsContext.Provider value={masterGridOptions}>
-          <UpdateLayoutContext.Provider value={updateLayout}>
-            <div className="grid-stack" ref={gridContainerElement}>
-              {children}
-            </div>
-          </UpdateLayoutContext.Provider>
-        </MasterGridOptionsContext.Provider>
-      </MasterGridContext.Provider>
-    </Fragment>
+    <MasterGridContext.Provider value={grid.current}>
+      <UpdateLayoutContext.Provider value={updateLayout}>
+        <div className="grid-stack" ref={gridContainerElement}>
+          {areChildrenMounted && children}
+        </div>
+      </UpdateLayoutContext.Provider>
+    </MasterGridContext.Provider>
   );
 }
