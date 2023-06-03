@@ -6,8 +6,12 @@
   width: 40%;
 }
 .gs-container {
-  width: 70%;
+  width: 60%;
 }
 .controls-container {
-  width: 10%;
+  width: 20%;
+  padding: 30px;
+}
+.controls-container > button {
+  margin: 5px;
 }

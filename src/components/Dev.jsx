@@ -15,28 +15,28 @@ function Dev() {
     savedLayout ?? [
       {
         id: "1",
-        x: 1,
-        y: 1,
+        x: 0,
+        y: 3,
         w: 2,
         h: 2,
         data: {
           type: "calendar",
           title: "A calendar widget",
-          data: Date.now(),
+          data: 1685811196713,
         },
       },
       {
         id: "2",
-        x: 1,
-        y: 1,
-        w: 6,
+        x: 0,
+        y: 0,
+        w: 2,
         h: 3,
         children: [
           {
             id: "3",
             x: 1,
-            y: 1,
-            w: 1,
+            y: 0,
+            w: 9,
             h: 1,
             data: {
               type: "map",
@@ -48,7 +48,7 @@ function Dev() {
             id: "4",
             x: 1,
             y: 1,
-            w: 1,
+            w: 8,
             h: 1,
             data: {
               type: "map",
@@ -152,6 +152,9 @@ function Dev() {
       <div className={styles["controls-container"]}>
         <button onClick={showHideGridstackContainer}>
           Show / Hide Gridstack Container
+        </button>
+        <button onClick={() => localStorage.clear("layout")}>
+          Clear localStorage
         </button>
         <button onClick={() => console.log(layout)}>console.log(layout)</button>
       </div>
