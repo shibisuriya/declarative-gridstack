@@ -60,6 +60,8 @@ function Dev() {
       },
     ]
   );
+  const [gridstackContainerVisibility, setGridstackContainerVisibility] =
+    useState(true);
 
   useEffect(() => {
     return () => {
@@ -109,40 +111,51 @@ function Dev() {
     }, 0);
   };
 
+  const showHideGridstackContainer = () => {
+    setGridstackContainerVisibility((visibility) => !visibility);
+  };
+
   return (
     <div className={styles["container"]}>
       <div className={styles["gs-container"]}>
-        <GridstackContainer
-          setLayout={setLayout}
-          columns={11}
-          rowHeight={100}
-          layoutChanged={layoutChanged}
-        >
-          {layout.map((item) => {
-            if ("children" in item) {
-              // is a subgrid!
-              const { children } = item;
-              return (
-                <GridstackItem
-                  key={item.id}
-                  id={item.id}
-                  x={item.x}
-                  y={item.y}
-                  w={item.w}
-                  h={item.h}
-                >
-                  <GridstackSubgrid items={children} key={item.id}>
-                    {children.map((child) => {
-                      return getItem(child);
-                    })}
-                  </GridstackSubgrid>
-                </GridstackItem>
-              );
-            } else {
-              return getItem(item);
-            }
-          })}
-        </GridstackContainer>
+        {gridstackContainerVisibility && (
+          <GridstackContainer
+            setLayout={setLayout}
+            columns={11}
+            rowHeight={100}
+            layoutChanged={layoutChanged}
+          >
+            {layout.map((item) => {
+              if ("children" in item) {
+                // is a subgrid!
+                const { children } = item;
+                return (
+                  <GridstackItem
+                    key={item.id}
+                    id={item.id}
+                    x={item.x}
+                    y={item.y}
+                    w={item.w}
+                    h={item.h}
+                  >
+                    <GridstackSubgrid items={children} key={item.id}>
+                      {children.map((child) => {
+                        return getItem(child);
+                      })}
+                    </GridstackSubgrid>
+                  </GridstackItem>
+                );
+              } else {
+                return getItem(item);
+              }
+            })}
+          </GridstackContainer>
+        )}
+      </div>
+      <div className={styles["controls-container"]}>
+        <button onClick={showHideGridstackContainer}>
+          Show / Hide Gridstack Container
+        </button>
       </div>
       <div className={styles["json-viewer"]}>
         <JsonView data={layout} style={darkStyles} />

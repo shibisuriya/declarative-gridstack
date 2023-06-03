@@ -42,7 +42,7 @@ export default function GridstackLayout(props) {
   useEffect(() => {
     init();
     return () => {
-      grid.current.destory();
+      grid.current.destroy();
     };
     // eslint-disable-next-line
   }, []);
