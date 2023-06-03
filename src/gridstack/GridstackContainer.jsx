@@ -26,9 +26,6 @@ export default function GridstackLayout(props) {
         return getUpdatedLayout(prevLayout, item);
       });
     }
-    setTimeout(() => {
-      props.layoutChanged();
-    }, 100);
   };
 
   const init = () => {
@@ -42,7 +39,7 @@ export default function GridstackLayout(props) {
   useEffect(() => {
     init();
     return () => {
-      grid.current.destory();
+      grid.current.destroy();
     };
     // eslint-disable-next-line
   }, []);

@@ -15,28 +15,28 @@ function Dev() {
     savedLayout ?? [
       {
         id: "1",
-        x: 1,
-        y: 1,
+        x: 0,
+        y: 3,
         w: 2,
         h: 2,
         data: {
           type: "calendar",
           title: "A calendar widget",
-          data: Date.now(),
+          data: 1685811196713,
         },
       },
       {
         id: "2",
-        x: 1,
-        y: 1,
-        w: 6,
+        x: 0,
+        y: 0,
+        w: 2,
         h: 3,
         children: [
           {
             id: "3",
             x: 1,
-            y: 1,
-            w: 1,
+            y: 0,
+            w: 9,
             h: 1,
             data: {
               type: "map",
@@ -48,7 +48,7 @@ function Dev() {
             id: "4",
             x: 1,
             y: 1,
-            w: 1,
+            w: 8,
             h: 1,
             data: {
               type: "map",
@@ -60,13 +60,16 @@ function Dev() {
       },
     ]
   );
+  const [gridstackContainerVisibility, setGridstackContainerVisibility] =
+    useState(true);
 
   useEffect(() => {
+    layoutChanged();
     return () => {
       // perform cleanup here if necessary
-      console.log("Component unmounted!");
+      console.log("Dev.jsx will unmount!");
     };
-  }, []); // empty dependency array to ensure it only runs once
+  }, [layout]); // empty dependency array to ensure it only runs once
 
   // const widgetStyles = {
   //   border: "1px solid red",
@@ -102,47 +105,58 @@ function Dev() {
   };
 
   const layoutChanged = () => {
-    console.log("layout changed -> ", Date.now());
-    console.log("layout -> ", layout);
-    setTimeout(() => {
-      localStorage.setItem("layout", JSON.stringify(layout));
-    }, 0);
+    localStorage.setItem("layout", JSON.stringify(layout));
+  };
+
+  const showHideGridstackContainer = () => {
+    setGridstackContainerVisibility((visibility) => !visibility);
   };
 
   return (
     <div className={styles["container"]}>
       <div className={styles["gs-container"]}>
-        <GridstackContainer
-          setLayout={setLayout}
-          columns={11}
-          rowHeight={100}
-          layoutChanged={layoutChanged}
-        >
-          {layout.map((item) => {
-            if ("children" in item) {
-              // is a subgrid!
-              const { children } = item;
-              return (
-                <GridstackItem
-                  key={item.id}
-                  id={item.id}
-                  x={item.x}
-                  y={item.y}
-                  w={item.w}
-                  h={item.h}
-                >
-                  <GridstackSubgrid items={children} key={item.id}>
-                    {children.map((child) => {
-                      return getItem(child);
-                    })}
-                  </GridstackSubgrid>
-                </GridstackItem>
-              );
-            } else {
-              return getItem(item);
-            }
-          })}
-        </GridstackContainer>
+        {gridstackContainerVisibility && (
+          <GridstackContainer
+            setLayout={setLayout}
+            columns={2}
+            rowHeight={100}
+            layoutChanged={layoutChanged}
+          >
+            {layout.map((item) => {
+              if ("children" in item) {
+                // is a subgrid!
+                const { children } = item;
+                return (
+                  <GridstackItem
+                    key={item.id}
+                    id={item.id}
+                    x={item.x}
+                    y={item.y}
+                    w={item.w}
+                    h={item.h}
+                  >
+                    <GridstackSubgrid items={children} key={item.id}>
+                      {children.map((child) => {
+                        return getItem(child);
+                      })}
+                    </GridstackSubgrid>
+                  </GridstackItem>
+                );
+              } else {
+                return getItem(item);
+              }
+            })}
+          </GridstackContainer>
+        )}
+      </div>
+      <div className={styles["controls-container"]}>
+        <button onClick={showHideGridstackContainer}>
+          Show / Hide Gridstack Container
+        </button>
+        <button onClick={() => localStorage.clear("layout")}>
+          Clear localStorage
+        </button>
+        <button onClick={() => console.log(layout)}>console.log(layout)</button>
       </div>
       <div className={styles["json-viewer"]}>
         <JsonView data={layout} style={darkStyles} />
