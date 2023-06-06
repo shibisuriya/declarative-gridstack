@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { JsonView, darkStyles } from "react-json-view-lite";
 import "react-json-view-lite/dist/index.css";
 import {
@@ -58,6 +58,39 @@ function Dev() {
           },
         ],
       },
+      {
+        id: "5",
+        x: 0,
+        y: 0,
+        w: 2,
+        h: 3,
+        children: [
+          {
+            id: "6",
+            x: 1,
+            y: 0,
+            w: 9,
+            h: 1,
+            data: {
+              type: "map",
+              title: "A map widget",
+              data: "Chennai, Tamil Nadu, India",
+            },
+          },
+          {
+            id: "7",
+            x: 1,
+            y: 1,
+            w: 8,
+            h: 1,
+            data: {
+              type: "map",
+              title: "A map widget",
+              data: "Chennai, Tamil Nadu, India",
+            },
+          },
+        ],
+      },
     ]
   );
   const [gridstackContainerVisibility, setGridstackContainerVisibility] =
@@ -77,20 +110,25 @@ function Dev() {
   //   margin: "10px",
   // };
 
-  const getWidget = (type, data) => {
+  const remove = (id, gridId) => {
+    gridsRef.current[gridId].remove(id);
+  };
+
+  const getWidget = ({ type, data, id, gridId } = {}) => {
     if (type === "calendar") {
-      return <CalendarWidget data={data} />;
+      return <CalendarWidget data={data} remove={() => remove(id, gridId)} />;
     } else if (type === "map") {
-      return <MapWidget data={data} />;
+      return <MapWidget data={data} remove={() => remove(id, gridId)} />;
     }
   };
 
-  const getItem = (item) => {
+  const getItem = ({ item, gridId = "master" } = {}) => {
     const {
       data,
       data: { type },
+      id,
     } = item ?? {};
-    const widget = getWidget(type, data);
+    const widget = getWidget({ type, data, id, gridId });
     return (
       <GridstackItem
         key={item.id}
@@ -113,11 +151,17 @@ function Dev() {
     setGridstackContainerVisibility((visibility) => !visibility);
   };
 
+  const gridsRef = useRef([]);
+  const createRef = (el, id) => {
+    gridsRef.current[id] = el;
+  };
+
   return (
     <div className={styles["container"]}>
       <div className={styles["gs-container"]}>
         {gridstackContainerVisibility && (
           <GridstackContainer
+            ref={(el) => createRef(el, "master")}
             setLayout={setLayout}
             columns={2}
             rowHeight={100}
@@ -126,7 +170,7 @@ function Dev() {
             {layout.map((item) => {
               if ("children" in item) {
                 // is a subgrid!
-                const { children } = item;
+                const { children, id: gridId } = item;
                 return (
                   <GridstackItem
                     key={item.id}
@@ -136,15 +180,19 @@ function Dev() {
                     w={item.w}
                     h={item.h}
                   >
-                    <GridstackSubgrid items={children} key={item.id}>
+                    <GridstackSubgrid
+                      items={children}
+                      key={gridId}
+                      ref={(el) => createRef(el, gridId)}
+                    >
                       {children.map((child) => {
-                        return getItem(child);
+                        return getItem({ item: child, gridId: gridId });
                       })}
                     </GridstackSubgrid>
                   </GridstackItem>
                 );
               } else {
-                return getItem(item);
+                return getItem({ item });
               }
             })}
           </GridstackContainer>
