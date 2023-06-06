@@ -1,10 +1,42 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import { GridStack } from "gridstack";
-import { SubgridContext, UpdateLayoutContext } from "./contexts";
+import {
+  SubgridContext,
+  UpdateLayoutContext,
+  RemoveItemFromModelContext,
+} from "./contexts";
 import getGridOptions from "./utils/getGridOptions";
 
-function GridstackSubgrid(props) {
+const GridstackSubgrid = React.forwardRef((props, ref) => {
   const [areChildrenMounted, setAreChildrenMounted] = useState(false);
+
+  const removeItemFromModel = useContext(RemoveItemFromModelContext);
+
+  const getItemElementUsingId = (id) => {
+    return subgridRef.current.querySelector(`.grid-stack-item[gs-id="${id}"]`);
+  };
+
+  const removeItem = (itemId) => {
+    const itemElem = getItemElementUsingId(itemId);
+    subgrid.current.removeWidget(itemElem, false); // RemoveDOM = false, don't remove DOM.
+    removeItemFromModel(itemId);
+  };
+
+  useImperativeHandle(
+    ref,
+    () => {
+      return {
+        remove: removeItem,
+      };
+    },
+    []
+  );
 
   const subgridRef = useRef();
   const subgrid = useRef();
@@ -40,6 +72,6 @@ function GridstackSubgrid(props) {
       }
     </SubgridContext.Provider>
   );
-}
+});
 
 export default GridstackSubgrid;
