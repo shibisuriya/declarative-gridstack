@@ -22,6 +22,7 @@ const GridstackLayout = React.forwardRef((props, ref) => {
         remove: removeItem,
       };
     },
+    // eslint-disable-next-line
     []
   );
 
@@ -72,8 +73,20 @@ const GridstackLayout = React.forwardRef((props, ref) => {
 
   useEffect(() => {
     if (!areChildrenMounted) {
+      const { accept = [] } = props;
       grid.current = GridStack.init(
-        masterGridOptions,
+        {
+          ...masterGridOptions,
+          acceptWidgets: (el) => {
+            const classList = new Set(el.classList);
+            for (let i = 0; i < accept.length; i++) {
+              if (classList.has(accept[i])) {
+                return true;
+              }
+            }
+            return false;
+          },
+        },
         gridContainerElement.current
       );
       attachEventListeners();

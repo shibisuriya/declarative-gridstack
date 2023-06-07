@@ -131,6 +131,7 @@ function Dev() {
     const widget = getWidget({ type, data, id, gridId });
     return (
       <GridstackItem
+        className="gs-widget"
         key={item.id}
         id={item.id}
         x={item.x}
@@ -166,6 +167,7 @@ function Dev() {
             columns={2}
             rowHeight={100}
             layoutChanged={layoutChanged}
+            accept={["gs-subgrid"]}
           >
             {layout.map((item) => {
               if ("children" in item) {
@@ -179,8 +181,10 @@ function Dev() {
                     y={item.y}
                     w={item.w}
                     h={item.h}
+                    className="gs-subgrid"
                   >
                     <GridstackSubgrid
+                      accept={["gs-widget"]}
                       items={children}
                       key={gridId}
                       ref={(el) => createRef(el, gridId)}

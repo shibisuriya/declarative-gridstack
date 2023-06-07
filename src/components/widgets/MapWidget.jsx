@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import styles from "./styles.module.css";
 function MapWidget(props = {}) {
   const { data, remove } = props;

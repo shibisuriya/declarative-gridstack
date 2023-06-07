@@ -35,6 +35,7 @@ const GridstackSubgrid = React.forwardRef((props, ref) => {
         remove: removeItem,
       };
     },
+    // eslint-disable-next-line
     []
   );
 
@@ -52,7 +53,19 @@ const GridstackSubgrid = React.forwardRef((props, ref) => {
   };
   useEffect(() => {
     if (!areChildrenMounted) {
-      subgrid.current = GridStack.addGrid(subgridRef.current, subgridOptions);
+      const { accept } = props;
+      subgrid.current = GridStack.addGrid(subgridRef.current, {
+        ...subgridOptions,
+        acceptWidgets: (el) => {
+          const classList = new Set(el.classList);
+          for (let i = 0; i < accept.length; i++) {
+            if (classList.has(accept[i])) {
+              return true;
+            }
+          }
+          return false;
+        },
+      });
       attachEventListeners();
       setAreChildrenMounted(true);
     } else {
