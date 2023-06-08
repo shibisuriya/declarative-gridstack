@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/reactified-gridstack/static/css/main.b58d5d72.css",
-    "main.js": "/reactified-gridstack/static/js/main.f2908f77.js",
+    "main.js": "/reactified-gridstack/static/js/main.15726d08.js",
     "static/js/787.e2d40f42.chunk.js": "/reactified-gridstack/static/js/787.e2d40f42.chunk.js",
     "index.html": "/reactified-gridstack/index.html",
     "main.b58d5d72.css.map": "/reactified-gridstack/static/css/main.b58d5d72.css.map",
-    "main.f2908f77.js.map": "/reactified-gridstack/static/js/main.f2908f77.js.map",
+    "main.15726d08.js.map": "/reactified-gridstack/static/js/main.15726d08.js.map",
     "787.e2d40f42.chunk.js.map": "/reactified-gridstack/static/js/787.e2d40f42.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b58d5d72.css",
-    "static/js/main.f2908f77.js"
+    "static/js/main.15726d08.js"
   ]
 }
