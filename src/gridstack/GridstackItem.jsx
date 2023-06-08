@@ -49,7 +49,7 @@ export default function GridstackItem(props) {
         className="grid-stack-item-content"
         style={{ overflowY: attr.noScroll ? "hidden" : "auto" }}
       >
-        {areChildrenMounted && children}
+        {areChildrenMounted ? children : null}
       </div>
     </div>
   );

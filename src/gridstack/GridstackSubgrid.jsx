@@ -39,6 +39,7 @@ const GridstackSubgrid = React.forwardRef((props, ref) => {
   );
 
   const subgridRef = useRef();
+  const isGridDestroyed = useRef();
   const subgrid = useRef();
 
   const subgridOptions = getGridOptions(props);
@@ -51,8 +52,10 @@ const GridstackSubgrid = React.forwardRef((props, ref) => {
     });
 
     subgrid.current.on("removed", (event, items) => {
-      for (let item of items) {
-        removeItemFromModel(item.id);
+      if (!isGridDestroyed.current) {
+        for (let item of items) {
+          removeItemFromModel(item.id);
+        }
       }
     });
   };
@@ -73,11 +76,22 @@ const GridstackSubgrid = React.forwardRef((props, ref) => {
       });
       attachEventListeners();
       setAreChildrenMounted(true);
+      isGridDestroyed.current = false;
     } else {
       throw new Error(
         "Fatal error: Must not initialize Gridstack subgrid multiple times."
       );
     }
+    return () => {
+      if (!isGridDestroyed.current) {
+        isGridDestroyed.current = true;
+        subgrid.current.destroy(false); // Destroy grid but don't remove all the DOM nodes... React will do that for you.
+      } else {
+        throw new Error(
+          "Fatal error: We are trying to destory a subgrid that has already been destroyed."
+        );
+      }
+    };
     // eslint-disable-next-line
   }, []);
   const { children } = props;
@@ -85,7 +99,7 @@ const GridstackSubgrid = React.forwardRef((props, ref) => {
     <SubgridContext.Provider value={subgrid.current}>
       {
         <div className="grid-stack" ref={subgridRef}>
-          {areChildrenMounted && children}
+          {areChildrenMounted ? children : null}
         </div>
       }
     </SubgridContext.Provider>

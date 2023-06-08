@@ -14,6 +14,7 @@ const GridstackLayout = React.forwardRef((props, ref) => {
   const grid = useRef();
   const gridContainerElement = useRef();
   const masterGridOptions = getGridOptions(props);
+  const isGridDestroyed = useRef();
 
   useImperativeHandle(
     ref,
@@ -62,8 +63,11 @@ const GridstackLayout = React.forwardRef((props, ref) => {
     });
 
     grid.current.on("removed", (event, items) => {
-      for (let item of items) {
-        removeItemFromModel(item.id);
+      // Don't update the model if the grid is destoryed.
+      if (!isGridDestroyed.current) {
+        for (let item of items) {
+          removeItemFromModel(item.id);
+        }
       }
     });
   };
@@ -94,6 +98,7 @@ const GridstackLayout = React.forwardRef((props, ref) => {
         },
         gridContainerElement.current
       );
+      isGridDestroyed.current = false;
       attachEventListeners();
       setAreChildrenMounted(true);
     } else {
@@ -102,7 +107,14 @@ const GridstackLayout = React.forwardRef((props, ref) => {
       );
     }
     return () => {
-      grid.current.destroy(); // Doesn't work!
+      if (!isGridDestroyed.current) {
+        isGridDestroyed.current = true;
+        grid.current.destroy(false); // Destroy grid but don't remove all the DOM nodes... React will do that for you.
+      } else {
+        throw new Error(
+          "Fatal error: Trying to destory a grid that has already been destroyed."
+        );
+      }
     };
     // eslint-disable-next-line
   }, []);
@@ -113,7 +125,7 @@ const GridstackLayout = React.forwardRef((props, ref) => {
       <UpdateLayoutContext.Provider value={updateLayout}>
         <RemoveItemFromModelContext.Provider value={removeItemFromModel}>
           <div className="grid-stack" ref={gridContainerElement}>
-            {areChildrenMounted && children}
+            {areChildrenMounted ? children : null}
           </div>
         </RemoveItemFromModelContext.Provider>
       </UpdateLayoutContext.Provider>
