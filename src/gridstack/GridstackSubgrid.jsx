@@ -25,7 +25,6 @@ const GridstackSubgrid = React.forwardRef((props, ref) => {
   const removeItem = (itemId) => {
     const itemElem = getItemElementUsingId(itemId);
     subgrid.current.removeWidget(itemElem, false); // RemoveDOM = false, don't remove DOM.
-    removeItemFromModel(itemId);
   };
 
   useImperativeHandle(
@@ -49,6 +48,12 @@ const GridstackSubgrid = React.forwardRef((props, ref) => {
   const attachEventListeners = () => {
     subgrid.current.on("added change", (event, items) => {
       updateLayout(items);
+    });
+
+    subgrid.current.on("removed", (event, items) => {
+      for (let item of items) {
+        removeItemFromModel(item.id);
+      }
     });
   };
   useEffect(() => {

@@ -35,7 +35,6 @@ const GridstackLayout = React.forwardRef((props, ref) => {
   const removeItem = (itemId) => {
     const itemElem = getItemElementUsingId(itemId);
     grid.current.removeWidget(itemElem, false); // RemoveDOM = false, don't remove DOM.
-    removeItemFromModel(itemId);
   };
 
   const removeItemFromModel = (itemId) => {
@@ -60,6 +59,12 @@ const GridstackLayout = React.forwardRef((props, ref) => {
   const attachEventListeners = () => {
     grid.current.on("added change", (event, items) => {
       updateLayout(items);
+    });
+
+    grid.current.on("removed", (event, items) => {
+      for (let item of items) {
+        removeItemFromModel(item.id);
+      }
     });
   };
 
