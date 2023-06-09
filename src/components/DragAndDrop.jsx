@@ -252,6 +252,18 @@ function Dev() {
         </div>
       </div>
       <div>
+        <h1>Trash</h1>
+        <div
+          id="trash"
+          style={{
+            width: "100%",
+            height: "100px",
+            border: "1px solid black",
+            margin: "10px",
+          }}
+        ></div>
+      </div>
+      <div>
         <h1>Grid</h1>
         <div className={styles["container"]}>
           <div className={styles["gs-container"]}>
