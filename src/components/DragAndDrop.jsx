@@ -8,6 +8,7 @@ import {
 } from "../gridstack";
 import { MapWidget, CalendarWidget } from "./widgets";
 import styles from "./styles.module.css";
+import HtmlInput from "./HtmlInput";
 
 function Dev() {
   // const savedLayout = JSON.parse(localStorage.getItem("layout"));
@@ -114,7 +115,9 @@ function Dev() {
   };
 
   const getWidget = ({ type, data, id, gridId } = {}) => {
-    if (type === "calendar") {
+    if (dndItems.some((item) => item.data.type == type)) {
+      return <HtmlInput data={data}></HtmlInput>;
+    } else if (type === "calendar") {
       return <CalendarWidget data={data} remove={() => remove(id, gridId)} />;
     } else if (type === "map") {
       return <MapWidget data={data} remove={() => remove(id, gridId)} />;
@@ -160,37 +163,64 @@ function Dev() {
     {
       id: 1,
       data: {
-        title: "Cow 1 ",
+        type: "button",
+        value: "Click me!",
       },
     },
     {
       id: 2,
       data: {
-        title: "Donkey 2",
+        type: "checkbox",
+        value: "true",
       },
     },
     {
       id: 3,
       data: {
-        title: "Milk",
+        type: "date",
+        value: "",
       },
     },
     {
       id: 4,
       data: {
-        title: "Horlicks",
+        type: "email",
+        value: "shibisuriya@gmail.com",
       },
     },
     {
       id: 5,
       data: {
-        title: "Coffee",
+        type: "color",
+        value: "",
       },
     },
     {
       id: 6,
       data: {
-        title: "Dog",
+        type: "number",
+        value: "Click me!",
+      },
+    },
+    {
+      id: 7,
+      data: {
+        type: "password",
+        value: "Click me!",
+      },
+    },
+    {
+      id: 8,
+      data: {
+        type: "radio",
+        value: "Click me!",
+      },
+    },
+    {
+      id: 9,
+      data: {
+        type: "range",
+        value: "Click me!",
       },
     },
   ]);
@@ -200,94 +230,100 @@ function Dev() {
   };
   return (
     <Fragment>
-      <div className={styles["dnd-container"]}>
-        {dndItems.map((item) => {
-          return (
-            <div
-              key={item.id}
-              className="gs-dnd-item grid-stack-item"
-              gs-dnd-item-id={item.id}
-            >
+      <div>
+        <h1 className="center-text">Drag and droppables</h1>
+        <div className={styles["dnd-container"]}>
+          {dndItems.map((item) => {
+            return (
               <div
-                className="grid-stack-item-content"
-                style={{ padding: "5px" }}
+                key={item.id}
+                className="gs-dnd-item grid-stack-item"
+                gs-dnd-item-id={item.id}
               >
-                {item.data.title}
+                <div
+                  className="grid-stack-item-content"
+                  style={{ padding: "5px" }}
+                >
+                  <HtmlInput data={item.data} />
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
-      <div className={styles["container"]}>
-        <div className={styles["gs-container"]}>
-          {gridstackContainerVisibility && (
-            <GridstackContainer
-              ref={(el) => createRef(el, "master")}
-              setLayout={setLayout}
-              columns={2}
-              rowHeight={100}
-              layoutChanged={layoutChanged}
-              accept={["gs-subgrid"]}
-              dnd={{
-                class: "gs-dnd-item",
-                dndItems: dndItems,
-                shredder: "#trash",
-                options: { appendTo: "body", helper: "clone" },
-                uidGenerator: uidGenerator,
-              }}
-            >
-              {layout.map((item) => {
-                if ("children" in item) {
-                  // is a subgrid!
-                  const { children, id: gridId } = item;
-                  return (
-                    <GridstackItem
-                      key={item.id}
-                      id={item.id}
-                      x={item.x}
-                      y={item.y}
-                      w={item.w}
-                      h={item.h}
-                      className="gs-subgrid"
-                    >
-                      <GridstackSubgrid
-                        accept={["gs-widget"]}
-                        gridId={item.id}
-                        items={children}
-                        key={gridId}
-                        ref={(el) => createRef(el, gridId)}
-                        dnd={{
-                          class: "gs-dnd-item",
-                          dndItems: dndItems,
-                          shredder: "#trash",
-                          options: { appendTo: "body", helper: "clone" },
-                          uidGenerator: uidGenerator,
-                        }}
+      <div>
+        <h1>Grid</h1>
+        <div className={styles["container"]}>
+          <div className={styles["gs-container"]}>
+            {gridstackContainerVisibility && (
+              <GridstackContainer
+                ref={(el) => createRef(el, "master")}
+                setLayout={setLayout}
+                columns={4}
+                rowHeight={100}
+                layoutChanged={layoutChanged}
+                accept={["gs-subgrid"]}
+                dnd={{
+                  class: "gs-dnd-item",
+                  dndItems: dndItems,
+                  shredder: "#trash",
+                  options: { appendTo: "body", helper: "clone" },
+                  uidGenerator: uidGenerator,
+                }}
+              >
+                {layout.map((item) => {
+                  if ("children" in item) {
+                    // is a subgrid!
+                    const { children, id: gridId } = item;
+                    return (
+                      <GridstackItem
+                        key={item.id}
+                        id={item.id}
+                        x={item.x}
+                        y={item.y}
+                        w={item.w}
+                        h={item.h}
+                        className="gs-subgrid"
                       >
-                        {children.map((child) => {
-                          return getItem({ item: child, gridId: gridId });
-                        })}
-                      </GridstackSubgrid>
-                    </GridstackItem>
-                  );
-                } else {
-                  return getItem({ item });
-                }
-              })}
-            </GridstackContainer>
-          )}
-        </div>
-        <div className={styles["controls-container"]}>
-          <button onClick={showHideGridstackContainer}>
-            Show / Hide Gridstack Container
-          </button>
-          <button onClick={() => console.log(layout)}>
-            console.log(layout)
-          </button>
-          <button onClick={uidGenerator}>UID--</button>
-        </div>
-        <div className={styles["json-viewer"]}>
-          <JsonView data={layout} style={darkStyles} />
+                        <GridstackSubgrid
+                          accept={["gs-widget"]}
+                          gridId={item.id}
+                          items={children}
+                          key={gridId}
+                          ref={(el) => createRef(el, gridId)}
+                          dnd={{
+                            class: "gs-dnd-item",
+                            dndItems: dndItems,
+                            shredder: "#trash",
+                            options: { appendTo: "body", helper: "clone" },
+                            uidGenerator: uidGenerator,
+                          }}
+                        >
+                          {children.map((child) => {
+                            return getItem({ item: child, gridId: gridId });
+                          })}
+                        </GridstackSubgrid>
+                      </GridstackItem>
+                    );
+                  } else {
+                    return getItem({ item });
+                  }
+                })}
+              </GridstackContainer>
+            )}
+          </div>
+          <div className={styles["controls-container"]}>
+            <button onClick={showHideGridstackContainer}>
+              Show / Hide Gridstack Container
+            </button>
+            <button onClick={() => console.log(layout)}>
+              console.log(layout)
+            </button>
+            <button onClick={uidGenerator}>UID--</button>
+          </div>
+          <div className={styles["json-viewer"]}>
+            <JsonView data={layout} style={darkStyles} />
+          </div>
         </div>
       </div>
     </Fragment>

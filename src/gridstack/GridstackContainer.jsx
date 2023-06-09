@@ -96,8 +96,10 @@ const GridstackLayout = React.forwardRef((props, ref) => {
           if ("uidGenerator" in dnd) {
             const { x, y, w, h, el } = item;
             const dndItemId = el.getAttribute("gs-dnd-item-id");
-            if (dndItemId in dndItems) {
-              const dndItem = cloneDeep(dndItems[dndItemId]);
+            const dndItem = cloneDeep(
+              dndItems.find((dndItem) => dndItem.id == dndItemId)
+            );
+            if (dndItem) {
               Object.assign(dndItem, {
                 x,
                 y,
