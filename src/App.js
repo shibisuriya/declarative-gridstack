@@ -1,8 +1,8 @@
 import "./App.css";
-import Dev from "./components/Dev.jsx";
+import DragAndDrop from "./components/DragAndDrop.jsx";
 
 function App() {
-  return <Dev></Dev>;
+  return <DragAndDrop></DragAndDrop>;
 }
 
 export default App;
