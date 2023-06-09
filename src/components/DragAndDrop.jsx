@@ -115,7 +115,7 @@ function Dev() {
   };
 
   const getWidget = ({ type, data, id, gridId } = {}) => {
-    if (dndItems.some((item) => item.data.type == type)) {
+    if (dndItems.some((item) => item.data.type === type)) {
       return <HtmlInput data={data}></HtmlInput>;
     } else if (type === "calendar") {
       return <CalendarWidget data={data} remove={() => remove(id, gridId)} />;
@@ -159,65 +159,65 @@ function Dev() {
     gridsRef.current[id] = el;
   };
 
-  const [dndItems, setDndItems] = useState([
+  const [dndItems] = useState([
     {
-      id: 1,
+      id: "1",
       data: {
         type: "button",
         value: "Click me!",
       },
     },
     {
-      id: 2,
+      id: "2",
       data: {
         type: "checkbox",
         value: "true",
       },
     },
     {
-      id: 3,
+      id: "3",
       data: {
         type: "date",
         value: "",
       },
     },
     {
-      id: 4,
+      id: "4",
       data: {
         type: "email",
         value: "shibisuriya@gmail.com",
       },
     },
     {
-      id: 5,
+      id: "5",
       data: {
         type: "color",
         value: "",
       },
     },
     {
-      id: 6,
+      id: "6",
       data: {
         type: "number",
         value: "Click me!",
       },
     },
     {
-      id: 7,
+      id: "7",
       data: {
         type: "password",
         value: "Click me!",
       },
     },
     {
-      id: 8,
+      id: "8",
       data: {
         type: "radio",
         value: "Click me!",
       },
     },
     {
-      id: 9,
+      id: "9",
       data: {
         type: "range",
         value: "Click me!",

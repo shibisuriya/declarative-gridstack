@@ -58,13 +58,13 @@ const GridstackLayout = React.forwardRef((props, ref) => {
   };
 
   const addItemToModel = (newItem, gridId) => {
-    if (gridId == "master") {
+    if (gridId === "master") {
       setLayout((prevLayout) => [...prevLayout, newItem]);
     } else {
       setLayout((prevLayout) => {
         const getNewLayout = (layout, newItem) => {
           return layout.map((item) => {
-            if ("children" in item && gridId == item.id) {
+            if ("children" in item && String(gridId) === String(item.id)) {
               return {
                 ...item,
                 children: [...item.children, newItem],
@@ -97,7 +97,9 @@ const GridstackLayout = React.forwardRef((props, ref) => {
             const { x, y, w, h, el } = item;
             const dndItemId = el.getAttribute("gs-dnd-item-id");
             const dndItem = cloneDeep(
-              dndItems.find((dndItem) => dndItem.id == dndItemId)
+              dndItems.find(
+                (dndItem) => String(dndItem.id) === String(dndItemId)
+              )
             );
             if (dndItem) {
               Object.assign(dndItem, {
