@@ -1,0 +1,3 @@
+[submodule "packages/gridstack.js"]
+	path = packages/gridstack.js
+	url = https://github.com/shibisuriya/gridstack.js.git
