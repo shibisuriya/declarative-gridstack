@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  align-items: flex-start;
+}
+.json-viewer {
+  width: 40%;
+}
+.gs-container {
+  width: 60%;
+}
+.controls-container {
+  width: 20%;
+  padding: 30px;
+}
+.controls-container > button {
+  margin: 5px;
+}
+.dnd-container {
+  border: 1px solid purple;
+  height: 200px;
+  margin: 10px;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(5, 1fr);
+}
+.gs-dnd-item {
+  display: flex;
+  height: 100%;
+}
