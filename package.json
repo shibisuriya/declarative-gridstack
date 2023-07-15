@@ -1,5 +1,5 @@
 {
-  "name": "reactified-gridstack",
+  "name": "declarative-gridstack",
   "version": "1.0.0",
   "description": "gridstack.js as React components, build interactive dashboards in minutes.",
   "main": "index.js",
