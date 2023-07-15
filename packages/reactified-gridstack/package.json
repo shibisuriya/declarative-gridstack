@@ -1,42 +1,28 @@
 {
-  "name": "reactified-gridstack",
-  "version": "0.1.0",
-  "homepage": "https://shibisuriya.github.io/reactified-gridstack",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "gridstack": "^7.2.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-json-view-lite": "^0.9.6",
-    "react-scripts": "5.0.1",
-    "tailwindcss": "^3.2.7",
-    "web-vitals": "^2.1.4"
-  },
+  "name": "webpack-gridstack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
   "scripts": {
-    "start": "react-scripts start --port 4000",
-    "build": "react-scripts build --no-warnings",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "webpack",
+    "dev": "webpack-dev-server"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "devDependencies": {
+    "@babel/preset-env": "^7.22.9",
+    "@babel/preset-react": "^7.22.5",
+    "babel-laoder": "^0.0.1-security",
+    "babel-loader": "^9.1.3",
+    "css-loader": "^6.8.1",
+    "html-webpack-plugin": "^5.5.3",
+    "react-json-view-lite": "^0.9.7",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1",
+    "gridstack": "*"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
