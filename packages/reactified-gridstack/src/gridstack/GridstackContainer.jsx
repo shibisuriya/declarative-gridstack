@@ -8,6 +8,7 @@ import {
   UpdateLayoutContext,
   RemoveItemFromModelContext,
   AddItemToModelContext,
+  ItemStoreContext,
 } from "./contexts";
 import getGridOptions from "./utils/getGridOptions.js";
 import cloneDeep from "lodash/cloneDeep";
@@ -145,6 +146,27 @@ const GridstackLayout = React.forwardRef((props, ref) => {
     });
   };
 
+  const store = useRef();
+  const itemStore = {
+    isPresent: function (id) {
+      return store.current?.id === id;
+    },
+    store: function (item) {
+      store.current = cloneDeep(item);
+    },
+    retrieve: function () {
+      if (store.current) {
+        return store.current;
+      } else {
+        throw new Error("Can't retrive item from an empty itemStore!");
+      }
+    },
+    clear: function () {
+      store.current = null;
+      console.log("store cleared, data stored in store = ", store);
+    },
+  };
+
   useEffect(() => {
     if (!areChildrenMounted) {
       const { accept = [], dnd } = props;
@@ -211,9 +233,11 @@ const GridstackLayout = React.forwardRef((props, ref) => {
       <UpdateLayoutContext.Provider value={updateLayout}>
         <RemoveItemFromModelContext.Provider value={removeItemFromModel}>
           <AddItemToModelContext.Provider value={addItemToModel}>
-            <div className="grid-stack" ref={gridContainerElement}>
-              {areChildrenMounted ? children : null}
-            </div>
+            <ItemStoreContext.Provider value={itemStore}>
+              <div className="grid-stack" ref={gridContainerElement}>
+                {areChildrenMounted ? children : null}
+              </div>
+            </ItemStoreContext.Provider>
           </AddItemToModelContext.Provider>
         </RemoveItemFromModelContext.Provider>
       </UpdateLayoutContext.Provider>

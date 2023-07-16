@@ -5,6 +5,7 @@ const SubgridContext = React.createContext();
 const UpdateLayoutContext = React.createContext();
 const RemoveItemFromModelContext = React.createContext();
 const AddItemToModelContext = React.createContext();
+const ItemStoreContext = React.createContext();
 
 export {
   MasterGridContext,
@@ -12,4 +13,5 @@ export {
   UpdateLayoutContext,
   RemoveItemFromModelContext,
   AddItemToModelContext,
+  ItemStoreContext,
 };

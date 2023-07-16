@@ -11,88 +11,98 @@ import styles from "./styles.module.css";
 
 function Dev() {
   const savedLayout = JSON.parse(localStorage.getItem("layout"));
-  const [layout, setLayout] = useState(
-    savedLayout ?? [
-      {
-        id: "1",
-        x: 0,
-        y: 3,
-        w: 2,
-        h: 2,
-        data: {
-          type: "calendar",
-          title: "A calendar widget",
-          data: 1685811196713,
+  const [layout, setLayout] = useState([
+    // {
+    //   id: "2",
+    //   x: 0,
+    //   y: 3,
+    //   w: 2,
+    //   h: 2,
+    //   data: {
+    //     type: "calendar",
+    //     title: "A calendar widget",
+    //     data: 1685811196713,
+    //   },
+    // },
+    // {
+    //   id: "1",
+    //   x: 0,
+    //   y: 3,
+    //   w: 2,
+    //   h: 2,
+    //   data: {
+    //     type: "calendar",
+    //     title: "A calendar widget",
+    //     data: 1685811196713,
+    //   },
+    // },
+    {
+      id: "2",
+      x: 0,
+      y: 0,
+      w: 2,
+      h: 3,
+      children: [
+        {
+          id: "3",
+          x: 1,
+          y: 0,
+          w: 9,
+          h: 1,
+          data: {
+            type: "map",
+            title: "A map widget",
+            data: "Chennai, Tamil Nadu, India",
+          },
         },
-      },
-      {
-        id: "2",
-        x: 0,
-        y: 0,
-        w: 2,
-        h: 3,
-        children: [
-          {
-            id: "3",
-            x: 1,
-            y: 0,
-            w: 9,
-            h: 1,
-            data: {
-              type: "map",
-              title: "A map widget",
-              data: "Chennai, Tamil Nadu, India",
-            },
+        // {
+        //   id: "4",
+        //   x: 1,
+        //   y: 1,
+        //   w: 8,
+        //   h: 1,
+        //   data: {
+        //     type: "map",
+        //     title: "A map widget",
+        //     data: "Chennai, Tamil Nadu, India",
+        //   },
+        // },
+      ],
+    },
+    {
+      id: "5",
+      x: 0,
+      y: 0,
+      w: 2,
+      h: 3,
+      children: [
+        {
+          id: "6",
+          x: 1,
+          y: 0,
+          w: 9,
+          h: 1,
+          data: {
+            type: "map",
+            title: "A map widget",
+            data: "Chennai, Tamil Nadu, India",
           },
-          {
-            id: "4",
-            x: 1,
-            y: 1,
-            w: 8,
-            h: 1,
-            data: {
-              type: "map",
-              title: "A map widget",
-              data: "Chennai, Tamil Nadu, India",
-            },
-          },
-        ],
-      },
-      {
-        id: "5",
-        x: 0,
-        y: 0,
-        w: 2,
-        h: 3,
-        children: [
-          {
-            id: "6",
-            x: 1,
-            y: 0,
-            w: 9,
-            h: 1,
-            data: {
-              type: "map",
-              title: "A map widget",
-              data: "Chennai, Tamil Nadu, India",
-            },
-          },
-          {
-            id: "7",
-            x: 1,
-            y: 1,
-            w: 8,
-            h: 1,
-            data: {
-              type: "map",
-              title: "A map widget",
-              data: "Chennai, Tamil Nadu, India",
-            },
-          },
-        ],
-      },
-    ]
-  );
+        },
+        // {
+        //   id: "7",
+        //   x: 1,
+        //   y: 1,
+        //   w: 8,
+        //   h: 1,
+        //   data: {
+        //     type: "map",
+        //     title: "A map widget",
+        //     data: "Chennai, Tamil Nadu, India",
+        //   },
+        // },
+      ],
+    },
+  ]);
   const [gridstackContainerVisibility, setGridstackContainerVisibility] =
     useState(true);
 
@@ -185,7 +195,7 @@ function Dev() {
                   >
                     <GridstackSubgrid
                       accept={["gs-widget"]}
-                      items={children}
+                      items={children ?? []}
                       key={gridId}
                       ref={(el) => createRef(el, gridId)}
                     >

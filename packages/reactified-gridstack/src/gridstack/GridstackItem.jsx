@@ -49,6 +49,7 @@ export default function GridstackItem(props) {
         className="grid-stack-item-content"
         style={{ overflowY: attr.noScroll ? "hidden" : "auto" }}
       >
+        <h5>{id}</h5>
         {areChildrenMounted ? children : null}
       </div>
     </div>

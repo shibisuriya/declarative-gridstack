@@ -11,6 +11,7 @@ import {
   UpdateLayoutContext,
   RemoveItemFromModelContext,
   AddItemToModelContext,
+  ItemStoreContext,
 } from "./contexts";
 import getGridOptions from "./utils/getGridOptions";
 import cloneDeep from "lodash/cloneDeep";
@@ -20,6 +21,7 @@ const GridstackSubgrid = React.forwardRef((props, ref) => {
 
   const removeItemFromModel = useContext(RemoveItemFromModelContext);
   const addItemToModel = useContext(AddItemToModelContext);
+  const itemStore = useContext(ItemStoreContext);
 
   const getItemElementUsingId = (id) => {
     return subgridRef.current.querySelector(`.grid-stack-item[gs-id="${id}"]`);
@@ -51,10 +53,10 @@ const GridstackSubgrid = React.forwardRef((props, ref) => {
 
   const attachEventListeners = () => {
     subgrid.current.on("added change", (event, items) => {
+      const { dnd, gridId, items: itemsPresentInThisGrid } = props;
       for (let item of items) {
         if (!("id" in item)) {
-          // The item has been dragged and dropped from outside!
-          const { dnd, gridId } = props;
+          // The item has been dragged and dropped from outside! By 'outside' I mean that the item was not part of any grid!
           const { dndItems } = dnd;
           if ("uidGenerator" in dnd) {
             const { x, y, w, h, el } = item;
@@ -76,11 +78,22 @@ const GridstackSubgrid = React.forwardRef((props, ref) => {
               "Fatal error: Please supply a UID generator to the grid to support drag and drop of items which doesn't belong to any gridstack grid."
             );
           }
-        } else if (false) {
-          // The item should not be the part of this grid.
-        } else {
-          // Item already exists in the layout model.
+        } else if (
+          itemsPresentInThisGrid.some(
+            (itemPresentInThisGrid) => itemPresentInThisGrid.id === item.id
+          )
+        ) {
+          // The item is part of this grid only...
           updateLayout(item);
+        } else if (itemStore.isPresent(item.id)) {
+          // The grid item is coming from another grid. User has dragged and dropped an item belonging to another grid.
+          const retrievedItem = itemStore.retrieve();
+          itemStore.clear();
+          // Add the retrieved item to this grid, since it was dropped on this particular grid!
+        } else {
+          throw new Error(
+            "An item was added to this grid, don't know what to do with this particular item!"
+          );
         }
       }
     });
@@ -91,6 +104,21 @@ const GridstackSubgrid = React.forwardRef((props, ref) => {
         for (let item of items) {
           // Dnd items dont' have id, they have _id!
           if ("id" in item) {
+            if ("_temporaryRemoved" in item) {
+              // This particular item is removed from a grid, and will be added to another grid... This happens when the user drags and drop a
+              // grid item from one grid to another.
+              const { items: itemsPresentInThisGrid } = props;
+              const itemToStore = itemsPresentInThisGrid.find(
+                (itemPresentInThisGrid) => itemPresentInThisGrid.id === item.id
+              );
+              if (itemToStore) {
+                itemStore.store(itemToStore);
+              } else {
+                throw new Error(
+                  "Item `_temporaryRemoved` from a grid, but the item is not even present in that particular grid!"
+                );
+              }
+            }
             removeItemFromModel(item.id);
           }
         }
