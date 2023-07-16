@@ -141,9 +141,13 @@ const GridstackLayout = React.forwardRef((props, ref) => {
   };
 
   const updateLayout = (item) => {
-    setLayout((prevLayout) => {
-      return getUpdatedLayout(prevLayout, item);
-    });
+    if (item) {
+      setLayout((prevLayout) => {
+        return getUpdatedLayout(prevLayout, item);
+      });
+    } else {
+      throw new Error("No item supplied, how do I update the layout?");
+    }
   };
 
   const store = useRef();

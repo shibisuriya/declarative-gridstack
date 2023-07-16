@@ -33,7 +33,9 @@ export default function GridstackItem(props) {
 
   // To ensure that the user's changes to certain props do not affect the initialized gs-item, it is important to make a copy of these props. The props that should not be mutated by the user after the gs-item has been initialized are x, y, w, h, and id. Once the gs-item has been initialized, the user should refrain from modifying these specific props.
   const { x, y, w, h, id, children, noScroll, className } = props;
-  const attr = cloneDeep({ x, y, w, h, id, noScroll });
+  // temp
+  const test = useRef(cloneDeep({ x, y, w, h, id, noScroll }));
+  const attr = test.current;
   return (
     <div
       ref={gsItemElement}
