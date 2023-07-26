@@ -14,18 +14,6 @@ function Dev() {
   const [layout, setLayout] = useState(
     savedLayout ?? [
       {
-        id: "2",
-        x: 0,
-        y: 3,
-        w: 2,
-        h: 2,
-        data: {
-          type: "calendar",
-          title: "A calendar widget",
-          data: 1685811196713,
-        },
-      },
-      {
         id: "1",
         x: 0,
         y: 3,
