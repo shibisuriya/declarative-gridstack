@@ -66,6 +66,7 @@ const GridstackSubgrid = React.forwardRef((props, ref) => {
     subgrid.current.on("added change", (event, items) => {
       const { dnd, gridId } = props;
       for (let item of items) {
+        const { w, h, x, y } = item;
         if (!("id" in item)) {
           // The item has been dragged and dropped from outside! By 'outside' I mean that the item was not part of any grid!
           const { dndItems } = dnd;
@@ -91,12 +92,12 @@ const GridstackSubgrid = React.forwardRef((props, ref) => {
           }
         } else if (itemsHash.current[item.id]) {
           // The item is part of this grid only...
-          const { w, h, x, y } = item;
           Object.assign(itemsHash.current[item.id], { w, h, x, y });
           updateLayout(item);
         } else if (itemStore.isPresent(item.id)) {
           // The grid item is coming from another grid. User has dragged and dropped an item belonging to another grid.
           const retrievedItem = itemStore.retrieve();
+          Object.assign(retrievedItem, { x, y, w, h });
           itemStore.clear();
           itemsHash.current[retrievedItem.id] = retrievedItem;
           addItemToModel(retrievedItem, gridId); // Push item to the layout.

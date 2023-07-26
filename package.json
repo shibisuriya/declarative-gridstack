@@ -8,7 +8,8 @@
   "private": true,
   "scripts": {
     "dev:react": "lerna run dev --scope=react",
-    "build:gridstack": "lerna run dev --scope=gridstack"
+    "build:gridstack": "lerna run build --scope=gridstack",
+    "build:gridstack:es6": "lerna run build:es6 --scope=gridstack"
   },
   "workspaces": [
     "packages/*"
