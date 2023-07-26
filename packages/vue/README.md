@@ -2,7 +2,6 @@
 
 gridstack.js as Vue components.
 
-## NOTE: Deprecated for (declarative-gridstack)[https://github.com/shibisuriya/declarative-gridstack]
 # Core concepts
 
 ## What are Gridstack containers?
