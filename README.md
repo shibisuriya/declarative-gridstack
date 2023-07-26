@@ -7,5 +7,5 @@ yarn workspace reactified-gridstack start
 ## To clone the repo use
 
 ```bash
-git clone --recurse-submodules https://github.com/shibisuriya/reactified-gridstack
+git clone --recurse-submodules https://github.com/shibisuriya/declarative-gridstack
 ```
