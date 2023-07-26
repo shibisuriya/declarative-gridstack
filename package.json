@@ -7,8 +7,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "bootstrap": "lerna install",
-    "reactified-gridstack": "lerna run start --scope=reactified-gridstack --stream"
+    "dev:react": "lerna run dev --scope=react",
+    "build:gridstack": "lerna run dev --scope=gridstack"
   },
   "workspaces": [
     "packages/*"
