@@ -1,10 +1,14 @@
-To run the react.js project (created using CRA) run the command
+# Declarative Gridstack
+
+gridstack.js as components.
+
+### To install
 
 ```bash
-yarn workspace reactified-gridstack start
+yarn install declarative-gridstack
 ```
 
-## To clone the repo use
+### To clone the repo to local:
 
 ```bash
 git clone --recurse-submodules https://github.com/shibisuriya/declarative-gridstack
