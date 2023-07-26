@@ -8,6 +8,7 @@
   "private": true,
   "scripts": {
     "dev:react": "lerna run dev --scope=react",
+    "dev:vue": "lerna run dev --scope=vue",
     "build:gridstack": "lerna run build --scope=gridstack",
     "build:gridstack:es6": "lerna run build:es6 --scope=gridstack"
   },
