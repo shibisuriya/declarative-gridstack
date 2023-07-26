@@ -19,7 +19,7 @@
     "webpack": "^5.88.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1",
-    "gridstack": "../gridstack.js"
+    "gridstack": "file:../gridstack.js"
   },
   "dependencies": {
     "react": "^18.2.0",
