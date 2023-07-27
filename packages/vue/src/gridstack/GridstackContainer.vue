@@ -2,10 +2,10 @@
   <div class="grid-stack"><slot></slot></div>
 </template>
 <script>
-import { GridStack } from "gridstack";
+import { GridStack } from "@declarative-gridstack/core";
 import { cloneDeep, isEmpty } from "lodash";
-import "gridstack/dist/gridstack-extra.min.css";
-import "gridstack/dist/gridstack.min.css";
+import "@declarative-gridstack/core/dist/gridstack-extra.min.css";
+import "@declarative-gridstack/core/dist/gridstack.min.css";
 export default {
   name: "GridstackLayout",
   data() {

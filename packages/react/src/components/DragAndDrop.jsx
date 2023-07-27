@@ -147,7 +147,7 @@ function Dev() {
   };
 
   const layoutChanged = () => {
-    // localStorage.setItem("layout", JSON.stringify(layout));
+    localStorage.setItem("layout", JSON.stringify(layout));
   };
 
   const showHideGridstackContainer = () => {
@@ -271,10 +271,11 @@ function Dev() {
               <GridstackContainer
                 ref={(el) => createRef(el, "master")}
                 setLayout={setLayout}
-                columns={4}
+                items={layout}
+                columns={12}
                 rowHeight={100}
                 layoutChanged={layoutChanged}
-                accept={["gs-subgrid"]}
+                accept={["gs-subgrid", "gs-widget"]}
                 dnd={{
                   class: "gs-dnd-item",
                   dndItems: dndItems,

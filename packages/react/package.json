@@ -1,5 +1,5 @@
 {
-  "name": "react",
+  "name": "@declarative-gridstack/react",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -19,7 +19,7 @@
     "webpack": "^5.88.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1",
-    "gridstack": "file:../gridstack.js"
+    "@declarative-gridstack/core": "file:../gridstack.js"
   },
   "dependencies": {
     "react": "^18.2.0",

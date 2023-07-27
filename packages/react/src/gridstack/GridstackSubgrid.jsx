@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { GridStack } from "gridstack";
+import { GridStack } from "@declarative-gridstack/core";
 import {
   SubgridContext,
   UpdateLayoutContext,

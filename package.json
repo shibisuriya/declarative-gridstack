@@ -7,9 +7,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev:react": "lerna run dev --scope=react",
-    "dev:vue": "lerna run dev --scope=vue",
-    "build:gridstack": "lerna run build --scope=gridstack",
+    "dev:react": "lerna run dev --scope=@declarative-gridstack/react",
+    "dev:vue": "lerna run dev --scope=@declarative-gridstack/vue",
+    "build:gridstack": "lerna run build --scope=@declarative-gridstack/core",
     "build:gridstack:es6": "lerna run build:es6 --scope=gridstack"
   },
   "workspaces": [

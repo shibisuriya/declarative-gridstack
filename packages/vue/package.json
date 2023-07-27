@@ -1,5 +1,5 @@
 {
-  "name": "vue",
+  "name": "@declarative-gridstack/vue",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
-    "gridstack": "file:../gridstack.js",
+    "@declarative-gridstack/core": "file:../gridstack.js",
     "lodash": "^4.17.21",
     "sass": "^1.58.3",
     "sass-loader": "^13.2.0",

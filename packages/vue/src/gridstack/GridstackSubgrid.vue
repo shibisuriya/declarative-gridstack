@@ -2,7 +2,7 @@
   <div v-if="loaded" class="grid-stack" ref="subgrid"><slot></slot></div>
 </template>
 <script>
-import { GridStack } from "gridstack";
+import { GridStack } from "@declarative-gridstack/core";
 export default {
   inject: {
     getMasterGridOptions: { type: Function },

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useImperativeHandle } from "react";
-import "gridstack/dist/gridstack-extra.min.css";
-import "gridstack/dist/gridstack.min.css";
-import { GridStack } from "gridstack";
+import "@declarative-gridstack/core/dist/gridstack-extra.min.css";
+import "@declarative-gridstack/core/dist/gridstack.min.css";
+import { GridStack } from "@declarative-gridstack/core";
 import getUpdatedLayout from "./utils/getUpdatedLayout";
 import {
   MasterGridContext,

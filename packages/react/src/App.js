@@ -1,10 +1,10 @@
 // import DragAndDrop from "./components/DragAndDrop.jsx";
-import Dev from "./components/Dev";
+import DragAndDrop from "./components/DragAndDrop";
 import React from "react";
 import "./App.css";
 
 function App() {
-  return <Dev></Dev>;
+  return <DragAndDrop></DragAndDrop>;
 }
 
 export default App;
