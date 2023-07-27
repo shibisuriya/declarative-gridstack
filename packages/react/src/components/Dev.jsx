@@ -14,22 +14,10 @@ function Dev() {
   const [layout, setLayout] = useState(
     savedLayout ?? [
       {
-        id: "1",
-        x: 0,
-        y: 3,
-        w: 2,
-        h: 2,
-        data: {
-          type: "calendar",
-          title: "A calendar widget",
-          data: 1685811196713,
-        },
-      },
-      {
         id: "2",
         x: 0,
-        y: 0,
-        w: 2,
+        y: 5,
+        w: 12,
         h: 3,
         children: [
           {
@@ -61,8 +49,8 @@ function Dev() {
       {
         id: "5",
         x: 0,
-        y: 0,
-        w: 2,
+        y: 2,
+        w: 12,
         h: 3,
         children: [
           {
@@ -77,19 +65,19 @@ function Dev() {
               data: "Chennai, Tamil Nadu, India",
             },
           },
-          // {
-          //   id: "7",
-          //   x: 1,
-          //   y: 1,
-          //   w: 8,
-          //   h: 1,
-          //   data: {
-          //     type: "map",
-          //     title: "A map widget",
-          //     data: "Chennai, Tamil Nadu, India",
-          //   },
-          // },
         ],
+      },
+      {
+        id: "1",
+        x: 0,
+        y: 0,
+        w: 12,
+        h: 2,
+        data: {
+          type: "calendar",
+          title: "A calendar widget",
+          data: 1685811196713,
+        },
       },
     ]
   );
@@ -164,10 +152,11 @@ function Dev() {
           <GridstackContainer
             ref={(el) => createRef(el, "master")}
             setLayout={setLayout}
-            columns={2}
+            columns={12}
             rowHeight={100}
             layoutChanged={layoutChanged}
-            accept={["gs-subgrid"]}
+            accept={["gs-subgrid", "gs-widget"]}
+            items={layout}
           >
             {layout.map((item) => {
               if ("children" in item) {

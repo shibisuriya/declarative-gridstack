@@ -41,6 +41,17 @@ const GridstackLayout = React.forwardRef((props, ref) => {
     grid.current.removeWidget(itemElem, false); // RemoveDOM = false, don't remove DOM.
   };
 
+  const itemsHash = useRef(); // Make a hash of props.items, always keep itemsHash in sync with props.items
+
+  useEffect(() => {
+    const { items } = props;
+    itemsHash.current = items.reduce((hash, item) => {
+      const { id } = item;
+      hash[id] = item;
+      return hash;
+    }, {});
+  }, []);
+
   const removeItemFromModel = (itemId) => {
     setLayout((prevlayout) => {
       const removeItemById = (id, prevLayout) => {
@@ -90,12 +101,12 @@ const GridstackLayout = React.forwardRef((props, ref) => {
   const attachEventListeners = () => {
     grid.current.on("added change", (event, items) => {
       for (let item of items) {
+        const { x, y, w, h, el } = item;
         if (!("id" in item)) {
           // The item has been dragged and dropped from outside!
           const { dnd } = props;
           const { dndItems } = dnd;
           if ("uidGenerator" in dnd) {
-            const { x, y, w, h, el } = item;
             const dndItemId = el.getAttribute("gs-dnd-item-id");
             const dndItem = cloneDeep(
               dndItems.find(
@@ -111,6 +122,7 @@ const GridstackLayout = React.forwardRef((props, ref) => {
                 id: String(dnd.uidGenerator()),
               });
               addItemToModel(dndItem, "master"); // Push item to the layout.
+              itemsHash.current[dndItem.id] = dndItem;
             }
             grid.current.removeWidget(item.el, true);
           } else {
@@ -118,21 +130,44 @@ const GridstackLayout = React.forwardRef((props, ref) => {
               "Fatal error: Please supply a UID generator to the grid to support drag and drop of items which doesn't belong to any gridstack grid."
             );
           }
-        } else if (false) {
-          // The item should not be the part of this grid.
-        } else {
-          // Item already exists in the layout model.
+        } else if (itemsHash.current[item.id]) {
+          // The item is part of this grid only...
+          Object.assign(itemsHash.current[item.id], { w, h, x, y });
           updateLayout(item);
+        } else if (itemStore.isPresent(item.id)) {
+          // The grid item is coming from another grid. User has dragged and dropped an item belonging to another grid.
+          const retrievedItem = itemStore.retrieve();
+          Object.assign(retrievedItem, { x, y, w, h });
+          itemStore.clear();
+          itemsHash.current[retrievedItem.id] = retrievedItem;
+          addItemToModel(retrievedItem, "master"); // Push item to the layout.
+          // Add the retrieved item to this grid, since it was dropped on this particular grid!
+        } else {
+          throw new Error("Item not present in the current grid!");
         }
       }
     });
 
     grid.current.on("removed", (event, items) => {
       // Don't update the model if the grid is destoryed.
+      debugger;
       if (!isGridDestroyed.current) {
         for (let item of items) {
           // Dnd items dont' have id, they have _id!
           if ("id" in item) {
+            if ("_temporaryRemoved" in item) {
+              // This particular item is removed from a grid, and will be added to another grid... This happens when the user drags and drop a
+              // grid item from one grid to another.
+              const itemToStore = itemsHash.current[item.id];
+              if (itemToStore) {
+                itemStore.store(itemToStore);
+              } else {
+                throw new Error(
+                  "Item `_temporaryRemoved` from a grid, but the item is not even present in that particular grid!"
+                );
+              }
+            }
+            delete itemsHash.current[item.id];
             removeItemFromModel(item.id);
           }
         }
