@@ -7,7 +7,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "preinstall": "yarn run cleanup",
+    "cleanup": "node ./scripts/cleanup.js",
     "dev:react": "lerna run dev --scope=@declarative-gridstack/react",
+    "build:react": "lerna run build --scope=@declarative-gridstack/react",
     "dev:vue": "lerna run dev --scope=@declarative-gridstack/vue",
     "build:gridstack": "lerna run build --scope=@declarative-gridstack/core",
     "build:gridstack:es6": "lerna run build:es6 --scope=gridstack"
