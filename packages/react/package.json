@@ -1,11 +1,11 @@
 {
   "name": "@declarative-gridstack/react",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./dist/main.js",
   "license": "MIT",
   "scripts": {
-    "build": "webpack",
-    "dev": "webpack-dev-server"
+    "build": "webpack --config ./webpack.prod.config.js",
+    "dev": "webpack serve --config ./webpack.dev.config.js"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.22.9",
@@ -19,9 +19,14 @@
     "webpack": "^5.88.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1",
-    "@declarative-gridstack/core": "file:../gridstack.js"
+    "@declarative-gridstack/core": "file:../gridstack.js",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
-  "dependencies": {
+  "files": [
+    "./dist"
+  ],
+  "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
