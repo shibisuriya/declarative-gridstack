@@ -1,5 +1,4 @@
-// import DragAndDrop from "./components/DragAndDrop.jsx";
-import DragAndDrop from "./components/DragAndDrop";
+import DragAndDrop from "./examples/drag-and-drop/DragAndDrop";
 import React from "react";
 import "./App.css";
 

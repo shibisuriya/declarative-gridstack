@@ -1,0 +1,41 @@
+.test {
+  padding: 100px;
+  background-color: red;
+}
+
+.calendar-widget {
+  background-color: red;
+}
+
+div[role="list"] {
+  padding: 10px;
+}
+
+.row {
+  display: flex;
+}
+
+.flex-1 {
+  width: 50%;
+}
+
+.widget {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-transform: capitalize;
+  color: white;
+  font-weight: bold;
+}
+
+.map-widget {
+  background-color: #ef2d56;
+}
+.calendar-widget {
+  background-color: #ed7d3a;
+}
+
+.title {
+  text-align: center;
+}
