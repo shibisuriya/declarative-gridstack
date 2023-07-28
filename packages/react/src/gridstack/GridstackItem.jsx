@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import cloneDeep from "lodash/cloneDeep";
 import { MasterGridContext, SubgridContext } from "./contexts";
 
-export default function GridstackItem(props) {
+function GridstackItem(props) {
   const [areChildrenMounted, setAreChildrenMounted] = useState(false);
 
   const gsItemElement = useRef();
@@ -51,9 +51,10 @@ export default function GridstackItem(props) {
         className="grid-stack-item-content"
         style={{ overflowY: attr.noScroll ? "hidden" : "auto" }}
       >
-        <h5>{id}</h5>
         {areChildrenMounted ? children : null}
       </div>
     </div>
   );
 }
+
+export default GridstackItem;
