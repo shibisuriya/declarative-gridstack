@@ -27,5 +27,5 @@ jobs:
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_DEPLOY }}
           publish_dir: ./packages/docs/.vitepress/dist # Adjust the path to the build output directory
