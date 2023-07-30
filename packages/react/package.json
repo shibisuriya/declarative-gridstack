@@ -1,6 +1,6 @@
 {
   "name": "@declarative-gridstack/react",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "main": "./dist/main.js",
   "license": "MIT",
   "author": "Shibi Suriya <shibisuriya.work@gmail.com> (https://github.com/shibisuriya)",
