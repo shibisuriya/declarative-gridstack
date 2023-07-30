@@ -1,6 +1,6 @@
 # Declarative Gridstack
 
-gridstack.js as components.
+gridstack.js as components. To read [docs](https://shibisuriya.github.io/declarative-gridstack/).
 
 ### To install
 
