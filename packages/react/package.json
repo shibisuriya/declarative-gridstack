@@ -3,6 +3,16 @@
   "version": "1.0.0",
   "main": "./dist/main.js",
   "license": "MIT",
+  "author": "Shibi Suriya <shibisuriya.work@gmail.com> (https://github.com/shibisuriya)",
+  "description": "gridstack.js as React components. Use gridstack.js in a declarative way to build complex applications with ease.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shibisuriya/declarative-gridstack"
+  },
+  "bugs": {
+    "url": "https://github.com/shibisuriya/declarative-gridstack/issues"
+  },
+  "homepage": "https://shibisuriya.github.io/declarative-gridstack/",
   "scripts": {
     "build": "webpack --config ./webpack.prod.config.js",
     "dev": "webpack serve --config ./webpack.dev.config.js"
@@ -19,7 +29,7 @@
     "webpack": "^5.88.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1",
-    "@declarative-gridstack/core": "file:../gridstack.js",
+    "@declarative-gridstack/core": "~1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -29,5 +39,19 @@
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
-  }
+  },
+  "keywords": [
+    "declarative",
+    "gridstack.js",
+    "grid",
+    "gridster",
+    "layout",
+    "responsive",
+    "dashboard",
+    "resize",
+    "drag&drop",
+    "widgets",
+    "React",
+    "JavaScript"
+  ]
 }

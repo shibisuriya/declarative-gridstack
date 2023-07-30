@@ -1,12 +1,28 @@
 # @declarative-gridstack/react
 
-gridstack.js as React components. Use gridstack.js in a declarative way to build complex dashboards with ease.
+gridstack.js as React components. Use gridstack.js in a declarative way to build complex applications with ease.
+
+## Note:
+
+If you have a React application scaffolded with CRA (create-react-app), it is recommended to remove the <React.StrictMode> component from the index.js file.
+
+```jsx
+<React.StrictMode>
+  <App />
+</React.StrictMode>
+```
+
+with
+
+```jsx
+<App />
+```
 
 # Core concepts
 
 ## What are Gridstack containers?
 
-Gridstack containers can hold Gridstack items, these items can be resized and repositioned.
+Gridstack containers can hold Gridstack items. These items can be resized and repositioned either using @declarative-gridstack/react's API or manually using mouse dragging.
 
 ```jsx
 const [layout, setLayout] = useState([
@@ -170,22 +186,6 @@ const Page = () => {
 
 The code snippet shows a simple Gridstack container containing a single item. If the user resizes the item by dragging its resize handle, the library automatically updates the item's size information in the model.
 
-The updated model might look something like this if the user increases the size of the Grid item by dragging the resize handle.
-
-```json
- {
-  "id": 3,
-  "x": 6,
-  "y": 0,
-  "w": 10, // Width is increased.
-  "h": 10, // Height is increased.
-  "data": {
-    "title": "I am a Grid item",
-    "ability": "I can be moved around and resized.",
-  },
-};
-```
-
 A [live example](https://shibisuriya.github.io/vue-gridstack/) would help to clarify this concept more effectively.
 
 The model of a specifc Gridstack layout could then be saved to an HTTP API.
@@ -220,8 +220,6 @@ useEffect(() => {
   });
 });
 ```
-
-[Click here](https://github.com/shibisuriya/vue-gridstack/blob/master/src/examples/StateSyncing.vue) to view code.
 
 ## Drag and drop
 
