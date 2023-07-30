@@ -21,8 +21,8 @@ jobs:
       - name: Install dependencies and build
         run: |
           yarn install
-          cd packages/docs
           yarn run build:react
+          cd packages/docs
           yarn run docs:build
 
       - name: Deploy to gh-pages
