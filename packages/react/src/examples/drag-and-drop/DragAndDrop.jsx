@@ -6,8 +6,16 @@ import {
   GridstackItem,
   GridstackSubgrid,
 } from "../../gridstack";
-import HtmlInput from "./HtmlInput";
-import { MapWidget, CalendarWidget } from "../../components/widgets";
+import HtmlInput from "../components/HtmlInput";
+import { Widget } from "../components/Widget";
+
+const MapWidget = (props) => {
+  return <Widget {...props} />;
+};
+
+const CalendarWidget = (props) => {
+  return <Widget {...props} />;
+};
 
 import "./styles.css";
 

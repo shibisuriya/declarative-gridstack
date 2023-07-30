@@ -1,9 +1,9 @@
-import DragAndDrop from "./examples/drag-and-drop/DragAndDrop";
+import Nested from "./examples/nested/Nested";
 import React from "react";
 import "./App.css";
 
 function App() {
-  return <DragAndDrop></DragAndDrop>;
+  return <Nested></Nested>;
 }
 
 export default App;

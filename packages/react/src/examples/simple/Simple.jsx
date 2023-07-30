@@ -2,20 +2,9 @@ import React, { useState } from "react";
 import { GridstackContainer, GridstackItem } from "../../gridstack";
 import { JsonView, darkStyles } from "react-json-view-lite";
 import "react-json-view-lite/dist/index.css";
+import { Widget } from "../components/Widget";
 
 import "./styles.css";
-
-const Widget = (props) => {
-  const { data } = props;
-  return (
-    <div className="widget">
-      <div>
-        <h1>{data.title}</h1>
-        <div>{data.data}</div>
-      </div>
-    </div>
-  );
-};
 
 function Simple() {
   const [layout, setLayout] = useState([

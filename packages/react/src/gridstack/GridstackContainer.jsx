@@ -150,7 +150,6 @@ const GridstackLayout = React.forwardRef((props, ref) => {
 
     grid.current.on("removed", (event, items) => {
       // Don't update the model if the grid is destoryed.
-      debugger;
       if (!isGridDestroyed.current) {
         for (let item of items) {
           // Dnd items dont' have id, they have _id!
