@@ -3270,11 +3270,6 @@ axios@^1.0.0:
     form-data "^4.0.0"
     proxy-from-env "^1.1.0"
 
-babel-laoder@^0.0.1-security:
-  version "0.0.1-security"
-  resolved "https://registry.yarnpkg.com/babel-laoder/-/babel-laoder-0.0.1-security.tgz#491130d907001e6a0b56900c98f00acdca56edf7"
-  integrity sha512-iYJiOO9JxAuBgbWYSq2qOBvrFSKl4/lz5f0gfYMBQfOaId2C9rqflFNgeNjeY4U6TtPft3C1S+vQNVDdi3drcg==
-
 babel-loader@^8.2.2:
   version "8.3.0"
   resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.3.0.tgz#124936e841ba4fe8176786d6ff28add1f134d6a8"

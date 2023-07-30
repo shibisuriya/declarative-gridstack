@@ -1,5 +1,5 @@
 import React from "react";
-import Simple from "./examples/simple/Simple";
+import Simple from "./Simple";
 
 function App() {
   return (

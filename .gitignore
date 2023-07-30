@@ -32,4 +32,5 @@ dist
 *.tgz 
 
 # vitepress cache
-/packages/docs/.vitepress/cache/
+/packages/docs/.vitepress/cache/*
+packages/docs/.vitepress/.temp/*
