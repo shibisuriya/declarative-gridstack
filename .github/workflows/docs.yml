@@ -22,6 +22,7 @@ jobs:
         run: |
           yarn install
           cd packages/docs
+          yarn build:react
           yarn docs:build
 
       - name: Deploy to gh-pages

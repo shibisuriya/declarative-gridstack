@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import { JsonView, darkStyles } from "react-json-view-lite";
 import "react-json-view-lite/dist/index.css";
 import {

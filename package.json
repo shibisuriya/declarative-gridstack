@@ -7,6 +7,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "dev:docs": "lerna run docs:dev --scope=docs",
+    "build:docs": "lerna run docs:build --scope=docs",
     "preinstall": "yarn run cleanup",
     "cleanup": "node ./scripts/cleanup.js",
     "dev:react": "lerna run dev --scope=@declarative-gridstack/react",
