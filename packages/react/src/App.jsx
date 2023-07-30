@@ -1,9 +1,13 @@
-import Nested from "./examples/nested/Nested";
 import React from "react";
+import Simple from "./examples/simple/Simple";
 import "./App.css";
 
 function App() {
-  return <Nested></Nested>;
+  return (
+    <div>
+      <Simple></Simple>
+    </div>
+  );
 }
 
 export default App;
