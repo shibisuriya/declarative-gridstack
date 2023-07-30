@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { GridstackContainer, GridstackItem } from "../../gridstack";
+import {
+  GridstackContainer,
+  GridstackItem,
+} from "@declarative-gridstack/react";
 import { JsonView, darkStyles } from "react-json-view-lite";
 import "react-json-view-lite/dist/index.css";
-import { Widget } from "../components/Widget";
+import { Widget } from "../widgets/Widget";
 
 import "./styles.css";
 

@@ -30,3 +30,6 @@ dist
 
 # package generated when `npm pack` is executed.
 *.tgz 
+
+# vitepress cache
+/packages/docs/.vitepress/cache/

@@ -8,22 +8,54 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: "Home", link: "/" },
-      { text: "Examples", link: "/markdown-examples" },
-    ],
-
-    sidebar: [
       {
-        text: "Examples",
-        items: [
-          { text: "Markdown Examples", link: "/markdown-examples" },
-          { text: "Runtime API Examples", link: "/api-examples" },
-        ],
+        text: "Why?",
+        link: "/why-declarative-gridstack",
+      },
+      { text: "Core Concepts", link: "/core-concepts" },
+      {
+        text: "Frameworks",
+        items: [{ text: "React", link: "frameworks/react/" }],
       },
     ],
 
+    sidebar: {
+      "frameworks/react/": [
+        {
+          text: "How-to",
+          items: [
+            { text: "Simple Grid", link: "frameworks/react/how-to/simple" },
+            { text: "Nested Grid", link: "frameworks/react/how-to/nested" },
+            {
+              text: "Drag and Drop",
+              link: "frameworks/react/how-to/drag-and-drop",
+            },
+          ],
+        },
+      ],
+      "core-concepts": [
+        {
+          text: "Section Title A",
+          items: [
+            { text: "Item A", link: "/item-a" },
+            { text: "Item B", link: "/item-b" },
+          ],
+        },
+        {
+          text: "Section Title A",
+          items: [
+            { text: "Item A", link: "/item-a" },
+            { text: "Item B", link: "/item-b" },
+          ],
+        },
+      ],
+    },
+
     socialLinks: [
-      { icon: "github", link: "https://github.com/vuejs/vitepress" },
+      {
+        icon: "github",
+        link: "https://github.com/shibisuriya/declarative-gridstack",
+      },
     ],
   },
 });

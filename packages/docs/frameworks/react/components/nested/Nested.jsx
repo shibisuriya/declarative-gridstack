@@ -6,7 +6,7 @@ import {
   GridstackContainer,
   GridstackItem,
   GridstackSubgrid,
-} from "../../gridstack";
+} from "@declarative-gridstack/react";
 
 import "./styles.css";
 
@@ -121,55 +121,49 @@ function Nested() {
   };
 
   return (
-    <div>
-      <div className="title">
-        <h3>Nested</h3>
-        <p>Move items between subgrid and main grid</p>
-      </div>
-      <div className="row">
-        <div className="flex-1">
-          <GridstackContainer
-            setLayout={setLayout}
-            columns={12}
-            rowHeight={100}
-            accept={["gs-subgrid", "gs-widget"]}
-            items={layout}
-          >
-            {layout.map((item) => {
-              if ("children" in item) {
-                // is a subgrid!
-                const { children, id: gridId } = item;
-                return (
-                  <GridstackItem
-                    key={item.id}
-                    id={item.id}
-                    x={item.x}
-                    y={item.y}
-                    w={item.w}
-                    h={item.h}
-                    className="gs-subgrid"
+    <div className="row">
+      <div className="flex-1">
+        <GridstackContainer
+          setLayout={setLayout}
+          columns={12}
+          rowHeight={100}
+          accept={["gs-subgrid", "gs-widget"]}
+          items={layout}
+        >
+          {layout.map((item) => {
+            if ("children" in item) {
+              // is a subgrid!
+              const { children, id: gridId } = item;
+              return (
+                <GridstackItem
+                  key={item.id}
+                  id={item.id}
+                  x={item.x}
+                  y={item.y}
+                  w={item.w}
+                  h={item.h}
+                  className="gs-subgrid"
+                >
+                  <GridstackSubgrid
+                    accept={["gs-widget"]}
+                    items={children ?? []}
+                    key={gridId}
+                    gridId={gridId}
                   >
-                    <GridstackSubgrid
-                      accept={["gs-widget"]}
-                      items={children ?? []}
-                      key={gridId}
-                      gridId={gridId}
-                    >
-                      {children.map((child) => {
-                        return getItem({ item: child, gridId: gridId });
-                      })}
-                    </GridstackSubgrid>
-                  </GridstackItem>
-                );
-              } else {
-                return getItem({ item });
-              }
-            })}
-          </GridstackContainer>
-        </div>
-        <div className="flex-1">
-          <JsonView data={layout} style={darkStyles} class="json-viewer" />
-        </div>
+                    {children.map((child) => {
+                      return getItem({ item: child, gridId: gridId });
+                    })}
+                  </GridstackSubgrid>
+                </GridstackItem>
+              );
+            } else {
+              return getItem({ item });
+            }
+          })}
+        </GridstackContainer>
+      </div>
+      <div className="flex-1">
+        <JsonView data={layout} style={darkStyles} class="json-viewer" />
       </div>
     </div>
   );
