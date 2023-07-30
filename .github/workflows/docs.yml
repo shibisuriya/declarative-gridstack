@@ -23,8 +23,7 @@ jobs:
           yarn install
           yarn run build:gridstack
           yarn run build:react
-          cd packages/docs
-          yarn run docs:build
+          yarn run build:docs
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
