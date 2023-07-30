@@ -21,6 +21,7 @@ jobs:
       - name: Install dependencies and build
         run: |
           yarn install
+          yarn run build:gridstack
           yarn run build:react
           cd packages/docs
           yarn run docs:build
