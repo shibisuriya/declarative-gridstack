@@ -6,7 +6,7 @@ import {
   GridstackContainer,
   GridstackItem,
   GridstackSubgrid,
-} from "@declarative-gridstack/react";
+} from "../../gridstack";
 
 import "./styles.css";
 

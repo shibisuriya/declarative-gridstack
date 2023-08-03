@@ -5,9 +5,9 @@ import {
   GridstackContainer,
   GridstackItem,
   GridstackSubgrid,
-} from "@declarative-gridstack/react";
-import HtmlInput from "../widgets/HtmlInput";
-import { Widget } from "../widgets/Widget";
+} from "../../gridstack";
+import HtmlInput from "../components/HtmlInput";
+import { Widget } from "../components/Widget";
 
 const MapWidget = (props) => {
   return <Widget {...props} />;

@@ -1,6 +1,6 @@
-# Simple grid
+# Nested grid
 
-A simple grid container
+A nested grid example.
 
 <div ref="el"></div>
 
@@ -8,11 +8,11 @@ A simple grid container
 import { createElement } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ref, onMounted } from 'vue'
-import {Simple} from '@declarative-gridstack/react/examples'
+import {Nested} from '@declarative-gridstack/react/examples'
 
 const el = ref()
 onMounted(() => {
   const root = createRoot(el.value)
-  root.render(createElement(Simple, {}, null))
+  root.render(createElement(Nested, {}, null))
 })
 </script>

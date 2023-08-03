@@ -52,5 +52,9 @@
     "widgets",
     "React",
     "JavaScript"
-  ]
+  ],
+  "exports": {
+    ".": "./dist/main.js",
+    "./examples": "./src/examples/index.js"
+  }
 }

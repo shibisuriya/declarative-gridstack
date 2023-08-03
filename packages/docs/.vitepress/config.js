@@ -17,17 +17,17 @@ export default defineConfig({
 
     sidebar: {
       "frameworks/react/": [
-        // {
-        //   text: "How-to",
-        //   items: [
-        //     { text: "Simple Grid", link: "frameworks/react/how-to/simple" },
-        //     { text: "Nested Grid", link: "frameworks/react/how-to/nested" },
-        //     {
-        //       text: "Drag and Drop",
-        //       link: "frameworks/react/how-to/drag-and-drop",
-        //     },
-        //   ],
-        // },
+        {
+          text: "How-to",
+          items: [
+            { text: "Simple Grid", link: "frameworks/react/how-to/simple" },
+            { text: "Nested Grid", link: "frameworks/react/how-to/nested" },
+            {
+              text: "Drag and Drop",
+              link: "frameworks/react/how-to/drag-and-drop",
+            },
+          ],
+        },
       ],
       "core-concepts": [
         {

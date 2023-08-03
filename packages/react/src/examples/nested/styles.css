@@ -26,3 +26,7 @@
 .title {
   text-align: center;
 }
+
+.grid-stack-nested {
+  background-color: red;
+}
