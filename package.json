@@ -9,7 +9,6 @@
   "scripts": {
     "dev:docs": "lerna run dev --scope=@declarative-gridstack/docs",
     "build:docs": "lerna run build --scope=@declarative-gridstack/docs",
-    "preinstall": "yarn run cleanup",
     "cleanup": "node ./scripts/cleanup.js",
     "dev:react": "lerna run dev --scope=@declarative-gridstack/react",
     "build:react": "lerna run build --scope=@declarative-gridstack/react",
