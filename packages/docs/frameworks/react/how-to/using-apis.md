@@ -43,4 +43,4 @@ To learn more about removing items from a grid click [here](./removing-items.md)
 
 You can push an item directly to the layout json while adding a item, to learn more click [here](../how-to/adding-items.md)
 
-To see a comprehensive list of APIs exposed by each component click [here](../apis/index.md)
+To see a comprehensive list of APIs exposed by each component click here.
