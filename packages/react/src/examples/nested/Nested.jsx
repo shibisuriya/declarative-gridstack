@@ -162,7 +162,7 @@ function Nested() {
           })}
         </GridstackContainer>
       </div>
-      <div className="flex-1">
+      <div className="flex-2">
         <JsonView data={layout} style={darkStyles} class="json-viewer" />
       </div>
     </div>

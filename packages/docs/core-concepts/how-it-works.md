@@ -53,35 +53,19 @@ const Page = () => {
 
 The code snippet shows a simple Gridstack container containing a single item. If the user resizes the item by dragging its resize handle (or by using @declarative-gridstack's APIs), the library automatically updates the item's size information in the model.
 
-The model of a specifc Gridstack layout could then be saved to an HTTP API.
+Try resizing / moving the grid item below to observe the model update automatically.
 
-```jsx
-const [layout, setLayout] = useState([
-  {
-    id: 3,
-    x: 6,
-    y: 0,
-    w: 6,
-    h: 3,
-    data: {
-      title: "I am a Grid item",
-      ability: "I can be moved around and resized.",
-    },
-  },
-]);
+<div ref="el"></div>
 
-const saveLayout = () => {
-  axios.post("/save-layout", layout).then(() => {});
-};
-```
+<script setup>
+import { createElement } from 'react'
+import { createRoot } from 'react-dom/client'
+import { ref, onMounted } from 'vue'
+import {Simple} from '@declarative-gridstack/react/examples'
 
-The saved model could then be retrieved from an HTTP API... To construct the back layout again.
-
-```js
-useEffect(() => {
-  const [layout, setLayout] = useState([]);
-  axios.get("/get-layout").then(({ data }) => {
-    setLayout(data);
-  });
-});
-```
+const el = ref()
+onMounted(() => {
+  const root = createRoot(el.value)
+  root.render(createElement(Simple, {}, null))
+})
+</script>

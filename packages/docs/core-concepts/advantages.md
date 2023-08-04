@@ -1,8 +1,9 @@
-# The major advantage of using gridstack.js in declarative fashion
+# Advantages
 
-The Gridstack layout model can be directly saved to a store without any processing, allowing easy retrieval and reconstruction later.
+Since the json representing the layout and the actual layout are in sync we don't have to perform
+any type of processing on the json before storing it.
 
-I am storing the model to a HTTP API in this case,
+I am storing the json to a HTTP API in this case.
 
 ```jsx
 const [layout, setLayout] = useState([
@@ -26,7 +27,7 @@ const saveLayout = () => {
 saveLayout();
 ```
 
-The saved model could then be retrieved from the store (an HTTP API in this case)... To construct the layout back again easily, since the primary function of the library is
+The saved json could then be retrieved from the store (an HTTP API in this case)... To construct the layout back again easily, since the primary function of the library is
 to convert a json model to a Gridstack layout.
 
 ```jsx

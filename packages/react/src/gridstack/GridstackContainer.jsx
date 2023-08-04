@@ -19,11 +19,17 @@ const GridstackLayout = React.forwardRef((props, ref) => {
   const masterGridOptions = getGridOptions(props);
   const isGridDestroyed = useRef();
 
+  const updateItem = (id, dimension) => {
+    const item = getItemElementUsingId(id);
+    grid.current.update(item, dimension);
+  };
+
   useImperativeHandle(
     ref,
     () => {
       return {
         remove: removeItem,
+        updateItem: updateItem,
       };
     },
     // eslint-disable-next-line
@@ -50,7 +56,7 @@ const GridstackLayout = React.forwardRef((props, ref) => {
       hash[id] = item;
       return hash;
     }, {});
-  }, []);
+  }, [props.items.length]);
 
   const removeItemFromModel = (itemId) => {
     setLayout((prevlayout) => {

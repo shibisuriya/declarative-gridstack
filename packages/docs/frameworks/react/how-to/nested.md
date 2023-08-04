@@ -1,6 +1,6 @@
 # Nested grid
 
-A nested grid example.
+Typical example of a nested grid. You can move items between the master grid and the subgrid.
 
 <div ref="el"></div>
 

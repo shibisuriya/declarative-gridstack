@@ -1,24 +1,32 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
+logo: ./logo.jpeg
 
 hero:
   name: "declarative-gridstack"
   text: "Use gridstack.js with ease."
-  tagline: My great project tagline
+  tagline: Use gridstack.js in declarative way to build complex dashboards with ease.
+  image:
+    src: /logo.jpeg
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
-    - theme: alt
-      text: API Examples
+      text: Understand core concepts
       link: /core-concepts
+    - theme: alt
+      text: React
+      link: /frameworks/react
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - icon: 🛠️
+    title: Declarative
+    details: Use gridstack.js in a declarative way.
+  - title: No data processing required
+    details: declarative-gridstack can easily convert a  json to a layout and vise versa.
+  - title: Supports nested grids
+    details: Use nested grids with ease.
+  - title: Simple APIs 
+    details: Simple and intuitive APIs.
+  - title: Framework support
+    details: Supports most popular frameworks.
 ---

@@ -1,11 +1,15 @@
 # One way binding
 
-Once the initial model is used to construct the layout is then useless.
-Which means changing the model won't change the layout... But when the user makes changes to the layout
-by interacting with the layout by mouse the layout is automatically update... This is the concept of
-one way binding. If you want to change the layout programmatically then use @declarative/gridstack's APIs don't change the model directly...
+If a user changes the layout by interacting with it the json will be automatically
+synced, but if you want to change the layout using code, then don't update the json use declarative-gridstack's APIs.
 
-This is a model for a Gridstack container with two items in it.
+The purpose of this lib is to convert a json representing a layout into a layout in the screen.
+Once the layout has been rendered using a layout json, don't update the json and expect the layout
+to change.
+
+::: danger
+Updating the layout json after the layout has been rendered might corrupt the json.
+:::
 
 ```jsx
 const [layout, setLayout] = useState([
@@ -36,7 +40,11 @@ const [layout, setLayout] = useState([
 ]);
 ```
 
-If you want to change the width of the item with id "4" then don't do the following.
+If you want to change the width of the item with id "4" then,
+
+::: warning
+Don't do the following.
+:::
 
 ```jsx
 setLayout((prevLayout) => {
@@ -52,9 +60,7 @@ setLayout((prevLayout) => {
 });
 ```
 
-Doing this is not recommanded... This might introduce inconsistency in states.
-
-The correct method of doing this is
+The correct method of updating a widget's dimension is using declarative-gridstack's APIs.
 
 ```jsx
 const Layout = () => {
@@ -101,4 +107,4 @@ const Layout = () => {
 };
 ```
 
-Update the items like this instead using @declarative-gridstack's APIs.
+Read more about this behavior [here](../frameworks//react/how-to/using-apis.md).

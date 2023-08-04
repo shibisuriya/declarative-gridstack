@@ -3,7 +3,10 @@
 }
 
 .flex-1 {
-  width: 50%;
+  width: 70% !important;
+}
+.flex-2 {
+  width: 30%;
 }
 
 .widget {
