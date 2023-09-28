@@ -1,10 +1,10 @@
 import React from "react";
-import Simple from "./Simple";
+import AddingItem from "./examples/nested/Nested"
 
 function App() {
   return (
     <div>
-      <Simple></Simple>
+      <AddingItem></AddingItem>
     </div>
   );
 }

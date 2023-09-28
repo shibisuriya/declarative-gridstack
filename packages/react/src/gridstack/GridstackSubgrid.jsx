@@ -41,7 +41,7 @@ const GridstackSubgrid = React.forwardRef((props, ref) => {
       hash[id] = item;
       return hash;
     }, {});
-  }, []);
+  }, [props.items.length]);
 
   useImperativeHandle(
     ref,
@@ -55,10 +55,9 @@ const GridstackSubgrid = React.forwardRef((props, ref) => {
   );
 
   const subgridRef = useRef();
-  const isGridDestroyed = useRef();
   const subgrid = useRef();
 
-  const subgridOptions = getGridOptions(props);
+  const subgridOptions = useRef(getGridOptions(props));
 
   const updateLayout = useContext(UpdateLayoutContext);
 
@@ -109,77 +108,82 @@ const GridstackSubgrid = React.forwardRef((props, ref) => {
     });
 
     subgrid.current.on("removed", (event, items) => {
-      // Don't update the model if the grid is destoryed.
-      if (!isGridDestroyed.current) {
-        for (let item of items) {
-          // Dnd items dont' have id, they have _id!
-          if ("id" in item) {
-            if ("_temporaryRemoved" in item) {
-              // This particular item is removed from a grid, and will be added to another grid... This happens when the user drags and drop a
-              // grid item from one grid to another.
-              const itemToStore = itemsHash.current[item.id];
-              if (itemToStore) {
-                itemStore.store(itemToStore);
-              } else {
-                throw new Error(
-                  "Item `_temporaryRemoved` from a grid, but the item is not even present in that particular grid!"
-                );
-              }
+      for (let item of items) {
+        // Dnd items dont' have id, they have _id!
+        if ("id" in item) {
+          if ("_temporaryRemoved" in item) {
+            // This particular item is removed from a grid, and will be added to another grid... This happens when the user drags and drop a
+            // grid item from one grid to another.
+            const itemToStore = itemsHash.current[item.id];
+            if (itemToStore) {
+              itemStore.store(itemToStore);
+            } else {
+              throw new Error(
+                "Item `_temporaryRemoved` from a grid, but the item is not even present in that particular grid!"
+              );
             }
-            delete itemsHash.current[item.id];
-            removeItemFromModel(item.id);
           }
+          delete itemsHash.current[item.id];
+          removeItemFromModel(item.id);
         }
       }
     });
   };
+
   useEffect(() => {
     if (!areChildrenMounted) {
-      const { accept = [], dnd } = props;
-
-      const getDndOptions = () => {
-        const { dnd } = props;
-        const { options, shredder } = dnd ?? {};
-        if (dnd?.class) {
-          const gridstackDragAndDropOptions = {
-            dragIn: dnd.class,
-          };
-          if (options) {
-            gridstackDragAndDropOptions["dragInOptions"] = options;
-          }
-          if (shredder) {
-            gridstackDragAndDropOptions["removable"] = shredder;
-          }
-          return gridstackDragAndDropOptions;
-        } else {
-          return {};
-        }
-      };
-
-      subgrid.current = GridStack.addGrid(subgridRef.current, {
-        ...subgridOptions,
-        ...getDndOptions(),
-        acceptWidgets: (el) => {
-          const classList = new Set(el.classList);
-          for (let i = 0; i < accept.length; i++) {
-            if (classList.has(accept[i]) || classList.has(dnd?.class ?? "")) {
-              return true;
-            }
-          }
-          return false;
-        },
-      });
-      attachEventListeners();
       setAreChildrenMounted(true);
-      isGridDestroyed.current = false;
     } else {
       throw new Error(
         "Fatal error: Must not initialize Gridstack subgrid multiple times."
       );
     }
+  }, []);
+
+  useEffect(() => {
+    const { accept = [], dnd } = props;
+
+    const getDndOptions = () => {
+      const { dnd } = props;
+      const { options, shredder } = dnd ?? {};
+      if (dnd?.class) {
+        const gridstackDragAndDropOptions = {
+          dragIn: dnd.class,
+        };
+        if (options) {
+          gridstackDragAndDropOptions["dragInOptions"] = options;
+        }
+        if (shredder) {
+          gridstackDragAndDropOptions["removable"] = shredder;
+        }
+        return gridstackDragAndDropOptions;
+      } else {
+        return {};
+      }
+    };
+
+    subgrid.current = GridStack.addGrid(subgridRef.current, {
+      ...subgridOptions.current,
+      ...getDndOptions(),
+      acceptWidgets: (el) => {
+        const classList = new Set(el.classList);
+        for (let i = 0; i < accept.length; i++) {
+          if (classList.has(accept[i]) || classList.has(dnd?.class ?? "")) {
+            return true;
+          }
+        }
+        return false;
+      },
+    });
+    attachEventListeners();
     return () => {
-      if (!isGridDestroyed.current) {
-        isGridDestroyed.current = true;
+      subgrid.current.off("removed added change");
+    };
+  }, [props.items.length]);
+
+  useEffect(() => {
+    return () => {
+      if (subgrid.current) {
         subgrid.current.destroy(false); // Destroy grid but don't remove all the DOM nodes... React will do that for you.
       } else {
         throw new Error(
@@ -187,7 +191,6 @@ const GridstackSubgrid = React.forwardRef((props, ref) => {
         );
       }
     };
-    // eslint-disable-next-line
   }, []);
   const { children } = props;
   return (

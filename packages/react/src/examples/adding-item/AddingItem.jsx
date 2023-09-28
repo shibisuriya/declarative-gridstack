@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useRef } from "react";
+import React, { Fragment, useState, useRef, useEffect } from "react";
 import { GridstackContainer, GridstackItem } from "../../gridstack";
 import { JsonView, darkStyles } from "react-json-view-lite";
 import "react-json-view-lite/dist/index.css";
@@ -22,13 +22,17 @@ function AddingItems() {
       },
     },
   ]);
+
   const id = useRef(-1);
-  const newId = () => {
+
+  const getNewId = () => {
     return id.current--;
   };
+
   const createNewItem = () => {
+    const newId = String(getNewId());
     return {
-      id: String(newId()),
+      id: newId,
       x: 0,
       y: 0,
       w: 12,
@@ -40,12 +44,14 @@ function AddingItems() {
       },
     };
   };
+
   const addItem = () => {
     const newItem = createNewItem();
     setLayout((prevLayout) => {
       return [...prevLayout, newItem];
     });
   };
+
   return (
     <Fragment>
       <div>

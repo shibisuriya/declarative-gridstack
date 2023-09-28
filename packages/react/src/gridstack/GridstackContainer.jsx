@@ -16,8 +16,9 @@ import cloneDeep from "lodash/cloneDeep";
 const GridstackLayout = React.forwardRef((props, ref) => {
   const grid = useRef();
   const gridContainerElement = useRef();
-  const masterGridOptions = getGridOptions(props);
-  const isGridDestroyed = useRef();
+  const masterGridOptions = useRef(getGridOptions(props));
+
+  const { setLayout, children } = props;
 
   const updateItem = (id, dimension) => {
     const item = getItemElementUsingId(id);
@@ -107,7 +108,7 @@ const GridstackLayout = React.forwardRef((props, ref) => {
   const attachEventListeners = () => {
     grid.current.on("added change", (event, items) => {
       for (let item of items) {
-        const { x, y, w, h, el } = item;
+        const { x, y, w, h, el, id } = item;
         if (!("id" in item)) {
           // The item has been dragged and dropped from outside!
           const { dnd } = props;
@@ -140,41 +141,42 @@ const GridstackLayout = React.forwardRef((props, ref) => {
           // The item is part of this grid only...
           Object.assign(itemsHash.current[item.id], { w, h, x, y });
           updateLayout(item);
-        } else if (itemStore.isPresent(item.id)) {
+        } else if (itemStore.current.isPresent(item.id)) {
           // The grid item is coming from another grid. User has dragged and dropped an item belonging to another grid.
-          const retrievedItem = itemStore.retrieve();
+          const retrievedItem = itemStore.current.retrieve();
           Object.assign(retrievedItem, { x, y, w, h });
-          itemStore.clear();
+          itemStore.current.clear();
           itemsHash.current[retrievedItem.id] = retrievedItem;
           addItemToModel(retrievedItem, "master"); // Push item to the layout.
           // Add the retrieved item to this grid, since it was dropped on this particular grid!
         } else {
-          throw new Error("Item not present in the current grid!");
+          throw new Error(
+            `Item with id ${id} not present in the current grid!`
+          );
         }
       }
     });
 
     grid.current.on("removed", (event, items) => {
       // Don't update the model if the grid is destoryed.
-      if (!isGridDestroyed.current) {
-        for (let item of items) {
-          // Dnd items dont' have id, they have _id!
-          if ("id" in item) {
-            if ("_temporaryRemoved" in item) {
-              // This particular item is removed from a grid, and will be added to another grid... This happens when the user drags and drop a
-              // grid item from one grid to another.
-              const itemToStore = itemsHash.current[item.id];
-              if (itemToStore) {
-                itemStore.store(itemToStore);
-              } else {
-                throw new Error(
-                  "Item `_temporaryRemoved` from a grid, but the item is not even present in that particular grid!"
-                );
-              }
+
+      for (let item of items) {
+        // Dnd items dont' have id, they have _id!
+        if ("id" in item) {
+          if ("_temporaryRemoved" in item) {
+            // This particular item is removed from a grid, and will be added to another grid... This happens when the user drags and drop a
+            // grid item from one grid to another.
+            const itemToStore = itemsHash.current[item.id];
+            if (itemToStore) {
+              itemStore.current.store(itemToStore);
+            } else {
+              throw new Error(
+                "Item `_temporaryRemoved` from a grid, but the item is not even present in that particular grid!"
+              );
             }
-            delete itemsHash.current[item.id];
-            removeItemFromModel(item.id);
           }
+          delete itemsHash.current[item.id];
+          removeItemFromModel(item.id);
         }
       }
     });
@@ -191,7 +193,7 @@ const GridstackLayout = React.forwardRef((props, ref) => {
   };
 
   const store = useRef();
-  const itemStore = {
+  const itemStore = useRef({
     isPresent: function (id) {
       return store.current?.id === id;
     },
@@ -209,34 +211,34 @@ const GridstackLayout = React.forwardRef((props, ref) => {
       store.current = null;
       console.log("store cleared, data stored in store = ", store);
     },
-  };
+  });
 
   useEffect(() => {
-    if (!areChildrenMounted) {
-      const { accept = [], dnd } = props;
+    const { accept = [], dnd } = props;
 
-      const getDndOptions = () => {
-        const { dnd } = props;
-        const { options, shredder } = dnd ?? {};
-        if (dnd?.class) {
-          const gridstackDragAndDropOptions = {
-            dragIn: dnd.class,
-          };
-          if (options) {
-            gridstackDragAndDropOptions["dragInOptions"] = options;
-          }
-          if (shredder) {
-            gridstackDragAndDropOptions["removable"] = shredder;
-          }
-          return gridstackDragAndDropOptions;
-        } else {
-          return {};
+    const getDndOptions = () => {
+      const { dnd } = props;
+      const { options, shredder } = dnd ?? {};
+      if (dnd?.class) {
+        const gridstackDragAndDropOptions = {
+          dragIn: dnd.class,
+        };
+        if (options) {
+          gridstackDragAndDropOptions["dragInOptions"] = options;
         }
-      };
+        if (shredder) {
+          gridstackDragAndDropOptions["removable"] = shredder;
+        }
+        return gridstackDragAndDropOptions;
+      } else {
+        return {};
+      }
+    };
 
+    if (!grid.current) {
       grid.current = GridStack.init(
         {
-          ...masterGridOptions,
+          ...masterGridOptions.current,
           ...getDndOptions(),
           acceptWidgets: (el) => {
             const classList = new Set(el.classList);
@@ -250,17 +252,28 @@ const GridstackLayout = React.forwardRef((props, ref) => {
         },
         gridContainerElement.current
       );
-      isGridDestroyed.current = false;
-      attachEventListeners();
+    }
+
+    attachEventListeners();
+
+    return () => {
+      grid.current.off("added change removed");
+    };
+  }, [props.items]);
+
+  useEffect(() => {
+    if (!areChildrenMounted) {
       setAreChildrenMounted(true);
     } else {
       throw new Error(
         "Fatal error: Must not initialize Gridstack instance multiple times."
       );
     }
+  }, []);
+
+  useEffect(() => {
     return () => {
-      if (!isGridDestroyed.current) {
-        isGridDestroyed.current = true;
+      if (grid.current) {
         grid.current.destroy(false); // Destroy grid but don't remove all the DOM nodes... React will do that for you.
       } else {
         throw new Error(
@@ -268,16 +281,14 @@ const GridstackLayout = React.forwardRef((props, ref) => {
         );
       }
     };
-    // eslint-disable-next-line
   }, []);
 
-  const { setLayout, children } = props;
   return (
     <MasterGridContext.Provider value={grid.current}>
       <UpdateLayoutContext.Provider value={updateLayout}>
         <RemoveItemFromModelContext.Provider value={removeItemFromModel}>
           <AddItemToModelContext.Provider value={addItemToModel}>
-            <ItemStoreContext.Provider value={itemStore}>
+            <ItemStoreContext.Provider value={itemStore.current}>
               <div className="grid-stack" ref={gridContainerElement}>
                 {areChildrenMounted ? children : null}
               </div>
