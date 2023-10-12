@@ -1,3 +1,6 @@
 [submodule "packages/gridstack.js"]
 	path = packages/gridstack.js
 	url = https://github.com/shibisuriya/gridstack.js.git
+[submodule "core"]
+	path = core
+	url = https://github.com/shibisuriya/gridstack.js

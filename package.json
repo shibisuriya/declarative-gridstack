@@ -14,7 +14,8 @@
     "build:react": "lerna run build --scope=@declarative-gridstack/react",
     "dev:vue": "lerna run dev --scope=@declarative-gridstack/vue",
     "build:gridstack": "lerna run build --scope=@declarative-gridstack/core",
-    "build:gridstack:es6": "lerna run build:es6 --scope=gridstack"
+    "build:gridstack:es6": "lerna run build:es6 --scope=gridstack",
+    "build:docusaurus": "lerna run build --scope=docusaurus"
   },
   "workspaces": [
     "packages/*"

@@ -3,7 +3,7 @@ name: Build and Deploy Docs
 on:
   push:
     branches:
-      - master # Adjust this to the main branch name if it's different
+      - docs/docusaurus # Adjust this to the main branch name if it's different
 
 jobs:
   build:
@@ -22,13 +22,18 @@ jobs:
 
       - name: Install dependencies and build
         run: |
+          cd ./core
           yarn install
-          yarn run build:gridstack
+          yarn run build
+          cd ../
+
+
+          yarn install
           yarn run build:react
-          yarn run build:docs
+          yarn run build:docusaurus
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GH_DEPLOY }}
-          publish_dir: ./packages/docs/.vitepress/dist # Adjust the path to the build output directory
+          publish_dir: ./packages/docusaurus/build/ # Adjust the path to the build output directory
