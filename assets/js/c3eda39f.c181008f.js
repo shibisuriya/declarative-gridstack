@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocusaurus=self.webpackChunkdocusaurus||[]).push([[4307],{4711:a=>{a.exports=JSON.parse('{"label":"facebook","permalink":"/declarative-gridstack/blog/tags/facebook","allTagsPath":"/declarative-gridstack/blog/tags","count":1}')}}]);
