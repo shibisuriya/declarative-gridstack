@@ -15,7 +15,8 @@
   "homepage": "https://shibisuriya.github.io/declarative-gridstack/",
   "scripts": {
     "build": "webpack --config ./webpack.prod.config.js",
-    "dev": "webpack serve --config ./webpack.dev.config.js"
+    "dev": "webpack serve --config ./webpack.dev.config.js",
+    "postinstall": "pnpm run build"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.22.9",
@@ -56,5 +57,8 @@
   "exports": {
     ".": "./dist/main.js",
     "./examples": "./src/examples/index.js"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
   }
 }

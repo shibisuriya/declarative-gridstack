@@ -22,10 +22,10 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          yarn install
-          yarn run build:gridstack
-          yarn run build:react
-          yarn run build:docs
+          pnpm install
+          pnpm run build:core
+          pnpm run build:react
+          pnpm run build:docs
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
