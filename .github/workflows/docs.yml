@@ -27,8 +27,6 @@ jobs:
       - name: Install dependencies and build
         run: |
           pnpm install
-          pnpm run build:core
-          pnpm run build:react
           pnpm run build:docs
 
       - name: Deploy to gh-pages
