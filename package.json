@@ -6,20 +6,8 @@
   "author": "Shibi Suriya P",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev:docs": "lerna run dev --scope=@declarative-gridstack/docs",
-    "build:docs": "lerna run build --scope=@declarative-gridstack/docs",
-    "cleanup": "node ./scripts/cleanup.js",
-    "dev:react": "lerna run dev --scope=@declarative-gridstack/react",
-    "build:react": "lerna run build --scope=@declarative-gridstack/react",
-    "dev:vue": "lerna run dev --scope=@declarative-gridstack/vue",
-    "build:gridstack": "lerna run build --scope=@declarative-gridstack/core",
-    "build:gridstack:es6": "lerna run build:es6 --scope=gridstack"
-  },
-  "workspaces": [
-    "packages/*"
-  ],
-  "devDependencies": {
-    "lerna": "^7.0.1"
+    "clean": "node ./scripts/clean.js"
   }
 }
