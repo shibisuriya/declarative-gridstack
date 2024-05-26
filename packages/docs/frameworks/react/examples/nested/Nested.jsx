@@ -6,7 +6,7 @@ import {
   GridstackContainer,
   GridstackItem,
   GridstackSubgrid,
-} from "../../gridstack";
+} from "@declarative-gridstack/react";
 
 import "./styles.css";
 
@@ -152,8 +152,6 @@ function Nested() {
   };
 
   const [pushTo, setPushTo] = useState("master");
-
-
 
   return (
     <Fragment>

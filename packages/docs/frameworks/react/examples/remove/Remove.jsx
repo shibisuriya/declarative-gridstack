@@ -1,12 +1,17 @@
-import React, { useState } from "react";
-import { GridstackContainer, GridstackItem } from "../../gridstack";
+import React, { useState, useRef } from "react";
+import {
+  GridstackContainer,
+  GridstackItem,
+} from "@declarative-gridstack/react";
 import { JsonView, darkStyles } from "react-json-view-lite";
 import "react-json-view-lite/dist/index.css";
 import { Widget } from "../components/Widget";
+import ItemContainer from "../components/ItemContainer";
 
 import "./styles.css";
 
-function Simple() {
+function Remove() {
+  const gridRef = useRef();
   const [layout, setLayout] = useState([
     {
       id: "1",
@@ -21,11 +26,20 @@ function Simple() {
       },
     },
   ]);
+
+  const remove = (id) => {
+    gridRef.current.remove(id);
+  };
+
   return (
     <div>
       <div className="row">
         <div className="flex-1">
-          <GridstackContainer items={layout} setLayout={setLayout}>
+          <GridstackContainer
+            items={layout}
+            setLayout={setLayout}
+            ref={gridRef}
+          >
             {layout.map((widget) => {
               return (
                 <GridstackItem
@@ -36,7 +50,9 @@ function Simple() {
                   w={widget.w}
                   h={widget.h}
                 >
-                  <Widget data={widget.data} />
+                  <ItemContainer remove={() => remove(widget.id)}>
+                    <Widget data={widget.data} />
+                  </ItemContainer>
                 </GridstackItem>
               );
             })}
@@ -50,4 +66,4 @@ function Simple() {
   );
 }
 
-export default Simple;
+export default Remove;

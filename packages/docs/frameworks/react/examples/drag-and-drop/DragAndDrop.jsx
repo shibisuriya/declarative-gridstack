@@ -5,7 +5,7 @@ import {
   GridstackContainer,
   GridstackItem,
   GridstackSubgrid,
-} from "../../gridstack";
+} from "@declarative-gridstack/react";
 import HtmlInput from "../components/HtmlInput";
 import { Widget } from "../components/Widget";
 

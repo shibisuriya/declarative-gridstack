@@ -45,7 +45,7 @@ Click the `Add item` button to add a new item to the layout.
 import { createElement } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ref, onMounted } from 'vue'
-import {AddingItem} from '@declarative-gridstack/react/examples'
+import {AddingItem} from '../examples/adding-item/AddingItem.jsx'
 
 const el = ref()
 onMounted(() => {

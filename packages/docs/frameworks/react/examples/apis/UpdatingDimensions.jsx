@@ -1,13 +1,18 @@
 import React, { useState, useRef } from "react";
-import { GridstackContainer, GridstackItem } from "../../gridstack";
+import {
+  GridstackContainer,
+  GridstackItem,
+} from "@declarative-gridstack/react";
 import { JsonView, darkStyles } from "react-json-view-lite";
 import "react-json-view-lite/dist/index.css";
 import { Widget } from "../components/Widget";
-import ItemContainer from "../components/ItemContainer";
 
 import "./styles.css";
 
-function Remove() {
+function UpdatingDimensions() {
+  const updateWidth = () => {
+    gridRef.current.updateItem("1", { w: 2, h: 3 });
+  };
   const gridRef = useRef();
   const [layout, setLayout] = useState([
     {
@@ -23,13 +28,11 @@ function Remove() {
       },
     },
   ]);
-
-  const remove = (id) => {
-    gridRef.current.remove(id);
-  };
-
   return (
     <div>
+      <div>
+        <button onClick={updateWidth}>Update width</button>
+      </div>
       <div className="row">
         <div className="flex-1">
           <GridstackContainer
@@ -47,9 +50,7 @@ function Remove() {
                   w={widget.w}
                   h={widget.h}
                 >
-                  <ItemContainer remove={() => remove(widget.id)}>
-                    <Widget data={widget.data} />
-                  </ItemContainer>
+                  <Widget data={widget.data} />
                 </GridstackItem>
               );
             })}
@@ -63,4 +64,4 @@ function Remove() {
   );
 }
 
-export default Remove;
+export default UpdatingDimensions;

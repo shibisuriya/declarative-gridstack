@@ -1,16 +1,15 @@
-import React, { useState, useRef } from "react";
-import { GridstackContainer, GridstackItem } from "../../gridstack";
+import React, { useState } from "react";
+import {
+  GridstackContainer,
+  GridstackItem,
+} from "@declarative-gridstack/react";
 import { JsonView, darkStyles } from "react-json-view-lite";
 import "react-json-view-lite/dist/index.css";
 import { Widget } from "../components/Widget";
 
 import "./styles.css";
 
-function UpdatingDimensions() {
-  const updateWidth = () => {
-    gridRef.current.updateItem("1", { w: 2, h: 3 });
-  };
-  const gridRef = useRef();
+function Simple() {
   const [layout, setLayout] = useState([
     {
       id: "1",
@@ -27,16 +26,9 @@ function UpdatingDimensions() {
   ]);
   return (
     <div>
-      <div>
-        <button onClick={updateWidth}>Update width</button>
-      </div>
       <div className="row">
         <div className="flex-1">
-          <GridstackContainer
-            items={layout}
-            setLayout={setLayout}
-            ref={gridRef}
-          >
+          <GridstackContainer items={layout} setLayout={setLayout}>
             {layout.map((widget) => {
               return (
                 <GridstackItem
@@ -61,4 +53,4 @@ function UpdatingDimensions() {
   );
 }
 
-export default UpdatingDimensions;
+export default Simple;
