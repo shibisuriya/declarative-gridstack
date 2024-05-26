@@ -1,0 +1,35 @@
+.row {
+  display: flex;
+}
+
+.flex-1 {
+  width: 70% !important;
+}
+.flex-2 {
+  width: 30%;
+}
+
+.widget {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-transform: capitalize;
+  color: white;
+  font-weight: bold;
+}
+
+.map-widget {
+  background-color: #ef2d56;
+}
+.calendar-widget {
+  background-color: #ed7d3a;
+}
+
+.title {
+  text-align: center;
+}
+
+.grid-stack-nested {
+  background-color: red;
+}
