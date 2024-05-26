@@ -44,10 +44,6 @@
     "React",
     "JavaScript"
   ],
-  "exports": {
-    ".": "./dist/main.js",
-    "./examples": "./src/examples/index.js"
-  },
   "dependencies": {
     "@declarative-gridstack/core": "workspace:^",
     "lodash": "^4.17.21"
