@@ -14,8 +14,8 @@
   },
   "homepage": "https://shibisuriya.github.io/declarative-gridstack/",
   "scripts": {
-    "build": "webpack --config ./webpack.prod.config.js",
-    "dev": "webpack serve --config ./webpack.prod.config.js",
+    "build": "webpack",
+    "dev": "webpack serve",
     "postinstall": "pnpm run build"
   },
   "devDependencies": {

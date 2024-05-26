@@ -8,6 +8,11 @@ module.exports = {
     library: "@declarative-gridstack/react",
     libraryTarget: "umd",
   },
+  devServer: {
+    devMiddleware: {
+      writeToDisk: true,
+    },
+  },
   entry: "./src/gridstack/index.js",
   externals: {
     react: "react",
