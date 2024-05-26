@@ -12,6 +12,7 @@ module.exports = {
   externals: {
     react: "react",
     "react-dom": "react-dom",
+    "@declarative-gridstack/react": "@declarative-gridstack/react",
   },
   module: {
     rules: [
