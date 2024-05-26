@@ -44,7 +44,7 @@ return <GridstackContainer ref={gridRef}></GridstackContainer>;
 import { createElement } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ref, onMounted } from 'vue'
-import {Remove} from '@declarative-gridstack/react/examples'
+import Remove from '../examples/remove/Remove.jsx'
 
 const el = ref()
 onMounted(() => {

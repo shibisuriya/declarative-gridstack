@@ -8,7 +8,7 @@ A simple grid container
 import { createElement } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ref, onMounted } from 'vue'
-import {Simple} from '@declarative-gridstack/react/examples'
+import Simple from '../examples/simple/Simple.jsx'
 
 const el = ref()
 onMounted(() => {

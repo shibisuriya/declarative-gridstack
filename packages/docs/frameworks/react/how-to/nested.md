@@ -8,7 +8,7 @@ Typical example of a nested grid. You can move items between the master grid and
 import { createElement } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ref, onMounted } from 'vue'
-import {Nested} from '@declarative-gridstack/react/examples'
+import Nested from '../examples/nested/Nested.jsx'
 
 const el = ref()
 onMounted(() => {
