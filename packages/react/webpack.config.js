@@ -13,7 +13,7 @@ module.exports = {
       writeToDisk: true,
     },
   },
-  entry: "./src/gridstack/index.js",
+  entry: "./src/index.js",
   externals: {
     react: "react",
     "react-dom": "react-dom",
@@ -22,10 +22,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.?js|jsx$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+          },
         },
       },
       {

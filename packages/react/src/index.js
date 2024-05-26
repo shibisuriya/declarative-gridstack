@@ -1,6 +1,4 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
+export { default as GridstackSubgrid } from "./GridstackSubgrid";
+export { default as GridstackContainer } from "./GridstackContainer";
+export { default as GridstackItem } from "./GridstackItem";
 
-const root = ReactDOM.createRoot(document.getElementById("app"));
-root.render(<App />);
