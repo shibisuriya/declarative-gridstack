@@ -7,6 +7,7 @@ export default defineConfig({
   description: "Docs for Declarative Gridstack.",
   logo: "static/images/logo.jpeg",
   cleanUrls: true,
+  base: "/declarative-gridstack/",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
