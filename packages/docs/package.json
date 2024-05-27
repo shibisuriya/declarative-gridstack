@@ -1,4 +1,6 @@
 {
+  "name": "@declarative-gridstack/docs",
+  "version": "0.1.5",
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build",
@@ -14,3 +16,4 @@
     "react-json-view-lite": "^0.9.7"
   }
 }
+
