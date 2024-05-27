@@ -1,5 +1,5 @@
 import defaultOptions from "./defaultOptions";
-import cloneDeep from "lodash/cloneDeep";
+import { cloneDeep } from "lodash";
 const getGridOptions = (props = {}) => {
   const {
     columns = defaultOptions.columns,

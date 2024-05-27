@@ -11,7 +11,7 @@ import {
   ItemStoreContext,
 } from "./contexts";
 import getGridOptions from "./utils/getGridOptions.js";
-import cloneDeep from "lodash/cloneDeep";
+import { cloneDeep } from "lodash";
 
 const GridstackLayout = React.forwardRef((props, ref) => {
   const grid = useRef();

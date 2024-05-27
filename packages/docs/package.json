@@ -1,10 +1,16 @@
 {
   "scripts": {
-    "docs:dev": "vitepress dev",
-    "docs:build": "vitepress build",
-    "docs:preview": "vitepress preview"
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
   },
   "devDependencies": {
     "vitepress": "^1.2.2"
+  },
+  "dependencies": {
+    "@declarative-gridstack/react": "workspace:^",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-json-view-lite": "^0.9.7"
   }
 }

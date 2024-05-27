@@ -1,7 +1,7 @@
 # Using the APIs
 
 The lib only supports one way binding so it is not recommended to update the json and expect the lib to
-update the layout ones the layout has been initialized and rendered, to learn more click [here](../../../core-concepts//one-way-binding.md)
+update the layout ones the layout has been initialized and rendered, to learn more click [here](../../concepts/one-way-binding.md)
 
 Instead of updating the json invoke the APIs supplied by the lib to perform actions such as, changing the widget's dimensions,
 updating number of columns in a grid, etc.
@@ -22,7 +22,7 @@ Press the `Update width` button and see the layout change.
 import { createElement } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ref, onMounted } from 'vue'
-import UpdatingDimensions from '../examples/apis/UpdatingDimensions.jsx'
+import UpdatingDimensions from '../../../components/react/apis/UpdatingDimensions.jsx'
 
 const el = ref()
 onMounted(() => {
@@ -41,6 +41,6 @@ To learn more about removing items from a grid click [here](./removing-items.md)
 
 ## Adding items to the grid
 
-You can push an item directly to the layout json while adding a item, to learn more click [here](../how-to/adding-items.md)
+You can push an item directly to the layout json while adding a item, to learn more click [here](../react/adding-items.md)
 
 To see a comprehensive list of APIs exposed by each component click here.

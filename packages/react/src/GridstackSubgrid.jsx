@@ -14,7 +14,7 @@ import {
   ItemStoreContext,
 } from "./contexts";
 import getGridOptions from "./utils/getGridOptions";
-import cloneDeep from "lodash/cloneDeep";
+import { cloneDeep } from "lodash";
 
 const GridstackSubgrid = React.forwardRef((props, ref) => {
   const [areChildrenMounted, setAreChildrenMounted] = useState(false);

@@ -1,6 +1,6 @@
-# Simple grid
+# Nested grid
 
-A simple grid container
+Typical example of a nested grid. You can move items between the master grid and the subgrid.
 
 <div ref="el"></div>
 
@@ -8,11 +8,11 @@ A simple grid container
 import { createElement } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ref, onMounted } from 'vue'
-import Simple from '../examples/simple/Simple.jsx'
+import Nested from '../../../components/react/nested/Nested.jsx'
 
 const el = ref()
 onMounted(() => {
   const root = createRoot(el.value)
-  root.render(createElement(Simple, {}, null))
+  root.render(createElement(Nested, {}, null))
 })
 </script>

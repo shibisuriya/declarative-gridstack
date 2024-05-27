@@ -6,6 +6,7 @@ hero:
   name: "Declarative Gridstack docs"
   text: "Docs for Declarative Gridstack."
   tagline: My great project tagline
+  image: /static/images/logo.jpeg
   actions:
     - theme: brand
       text: Markdown Examples
@@ -22,4 +23,3 @@ features:
   - title: Feature C
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
-
