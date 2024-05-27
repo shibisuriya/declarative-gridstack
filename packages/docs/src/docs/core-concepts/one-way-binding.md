@@ -106,5 +106,3 @@ const Layout = () => {
   );
 };
 ```
-
-Read more about this behavior [here](../frameworks//react/how-to/using-apis.md).

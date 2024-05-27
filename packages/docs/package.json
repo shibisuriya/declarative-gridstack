@@ -1,24 +1,10 @@
 {
-  "name": "@declarative-gridstack/docs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vitepress dev --host",
-    "build": "vitepress build",
-    "preview": "vitepress preview"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@declarative-gridstack/react": "workspace:^",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-json-view-lite": "^0.9.7"
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
   },
   "devDependencies": {
-    "vitepress": "^1.0.0-beta.7"
+    "vitepress": "^1.2.2"
   }
 }

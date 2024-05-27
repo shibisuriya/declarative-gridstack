@@ -61,7 +61,7 @@ Try resizing / moving the grid item below to observe the model update automatica
 import { createElement } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ref, onMounted } from 'vue'
-import Simple from '../frameworks/react/examples/simple/Simple.jsx'
+import Simple from '../guides/react/examples/simple/Simple.jsx'
 
 const el = ref()
 onMounted(() => {
