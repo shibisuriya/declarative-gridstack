@@ -1,0 +1,1 @@
+import{R as e}from"./index.B6uJ61uR.js";const l="_widget_1mrtr_1",n={widget:l},c=a=>{const{data:t}=a;return e.createElement("div",{className:n.widget},e.createElement("div",null,e.createElement("h1",null,t.title),e.createElement("div",null,t.data)))};export{c as W};
