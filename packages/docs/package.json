@@ -11,9 +11,10 @@
   },
   "dependencies": {
     "@declarative-gridstack/react": "workspace:^",
+    "@declarative-gridstack/vue": "workspace:^",
+    "@loadable/component": "^5.16.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-json-view-lite": "^0.9.7"
+    "react-json-view": "^1.21.3"
   }
 }
-

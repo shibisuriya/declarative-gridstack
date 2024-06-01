@@ -3,22 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "vue-cli-service serve --skip-plugins @vue/cli-plugin-eslint",
+    "dev": "rollup -c",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "postinstall": "vue-cli-service build"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "core-js": "^3.8.3",
     "@declarative-gridstack/core": "file:../gridstack.js",
+    "core-js": "^3.8.3",
     "lodash": "^4.17.21",
-    "sass": "^1.58.3",
-    "sass-loader": "^13.2.0",
     "vue": "^2.6.14",
-    "vue-json-pretty": "^1.9.4",
-    "vue-router": "^3.5.1"
+    "vue-json-pretty": "^1.9.4"
   },
   "devDependencies": {
+    "sass-loader": "^13.2.0",
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
     "@vue/cli-plugin-babel": "~5.0.0",
@@ -27,6 +24,10 @@
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
+    "rollup": "^4.18.0",
+    "rollup-plugin-scss": "3",
+    "rollup-plugin-vue": "^6.0.0",
+    "sass": "^1.62.0",
     "vue-template-compiler": "^2.6.14"
   },
   "eslintConfig": {

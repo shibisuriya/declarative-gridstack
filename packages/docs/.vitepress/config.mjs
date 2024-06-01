@@ -3,7 +3,7 @@ import { defineConfig } from "vitepress";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   srcDir: "./src/docs/",
-  title: "Declarative Gridstack docs",
+  title: "Declarative Gridstack",
   description: "Docs for Declarative Gridstack.",
   logo: "static/images/logo.jpeg",
   cleanUrls: true,
@@ -11,7 +11,8 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: "Concepts", link: "/concepts/gridstack-containers" },
+      { text: "Showcase", link: "/showcase/ubuntu-desktop" },
+      { text: "Concepts", link: "/concepts/gridstack-grids" },
       { text: "Guides", link: "/guides/react/simple" },
       { text: "API", link: "/api/react/gridstack-items" },
     ],
@@ -47,8 +48,8 @@ export default defineConfig({
           text: "Concepts",
           items: [
             {
-              text: "Gridstack Containers",
-              link: "/concepts/gridstack-containers",
+              text: "Gridstack Grids",
+              link: "/concepts/gridstack-grids",
             },
             {
               text: "Gridstack Items",
@@ -85,8 +86,19 @@ export default defineConfig({
               text: "React",
               collapsed: false,
               items: [
-                { text: "Adding items", link: "/guides/react/adding-items/" },
-                { text: "CRA (create-react-app)", link: "/guides/react/cra/" },
+                {
+                  text: "Using CRA (Create React App)",
+                  link: "/guides/react/cra",
+                },
+                { text: "Adding items", link: "/guides/react/adding-items" },
+                {
+                  text: "Removing items",
+                  link: "/guides/react/removing-items",
+                },
+                {
+                  text: "Simple",
+                  link: "/guides/react/simple",
+                },
                 {
                   text: "Drag and drop into trash",
                   link: "/guides/react/drag-and-drop-into-trash",
@@ -100,14 +112,6 @@ export default defineConfig({
                   link: "/guides/react/nested",
                 },
                 {
-                  text: "Removing items",
-                  link: "/guides/react/removing-items",
-                },
-                {
-                  text: "Simple",
-                  link: "/guides/react/simple",
-                },
-                {
                   text: "Using APIs",
                   link: "/guides/react/using-apis",
                 },
@@ -116,14 +120,26 @@ export default defineConfig({
             {
               text: "Vue",
               collapsed: true,
-              items: [],
+              items: [
+                {
+                  text: "Nested",
+                  link: "/guides/vue/nested",
+                },
+                {
+                  text: "Using APIs",
+                  link: "/guides/vue/using-apis",
+                },
+              ],
             },
           ],
         },
       ],
     },
     socialLinks: [
-      { icon: "github", link: "https://github.com/vuejs/vitepress" },
+      {
+        icon: "github",
+        link: "https://github.com/shibisuriya/declarative-gridstack",
+      },
     ],
   },
 });

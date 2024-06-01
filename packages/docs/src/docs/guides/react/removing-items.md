@@ -1,12 +1,11 @@
 # Removing items from a grid
 
-Don't remove the item from the layout json if you want to remove an item from the grid.
 ::: warning
-Don't do this!
+If you want to remove a `Gridstack item` from a `Gridstack container`, don't remove the item from the state variable.
 :::
 
 ```jsx
-const [layout, setLayout] = useState([
+const [container, setContainer] = useState([
   {
     id: "1",
     x: 0,
@@ -44,7 +43,7 @@ return <GridstackContainer ref={gridRef}></GridstackContainer>;
 import { createElement } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ref, onMounted } from 'vue'
-import Remove from '../../../components/react/remove/Remove.jsx'
+import Remove from '../../../components/react/Remove.jsx'
 
 const el = ref()
 onMounted(() => {

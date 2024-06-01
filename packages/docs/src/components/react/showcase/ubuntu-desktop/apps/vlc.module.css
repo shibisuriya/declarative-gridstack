@@ -1,0 +1,15 @@
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Ensure the overlay is above the iframe */
+}
+
+.youtubeVideo {
+  position: absolute;
+  width: 142.857%;
+  height: 142.857%;
+  transform: scale(0.7);
+  transform-origin: 0 0;
+  border: none;
+}

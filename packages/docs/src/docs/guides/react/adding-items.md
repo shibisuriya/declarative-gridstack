@@ -1,6 +1,6 @@
-# Adding items
+# Adding an item to a container after it has been initialized
 
-To add an item to a grid, push the item direcly to the layout json.
+To add an item to a container after it has been initialized, push the item direcly to the layout json.
 
 ```jsx
 const [layout, setLayout] = useState([
@@ -45,7 +45,7 @@ Click the `Add item` button to add a new item to the layout.
 import { createElement } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ref, onMounted } from 'vue'
-import AddingItem from '../../../components/react/adding-item/AddingItem.jsx'
+import AddingItem from '../../../components/react/AddingItem.jsx'
 
 const el = ref()
 onMounted(() => {

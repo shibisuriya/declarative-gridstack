@@ -1,0 +1,7 @@
+.body {
+  background-color: green;
+  box-sizing: border-box;
+  grid-area: 5 / 5 / 101 / 101;
+  background-image: url("./images/desktop-background.png");
+  background-size: cover;
+}

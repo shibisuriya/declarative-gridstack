@@ -1,4 +1,4 @@
-# Vue Gridstack
+# Vue Gridstack (WIP)
 
 gridstack.js as Vue components.
 

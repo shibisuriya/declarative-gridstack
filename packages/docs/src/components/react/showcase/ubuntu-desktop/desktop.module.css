@@ -1,0 +1,11 @@
+.desktop {
+  width: 100%;
+  display: grid;
+  margin: 0.5rem;
+  height: 80vh;
+  background-color: purple;
+  grid-template-columns: repeat(100, 1fr);
+  grid-template-rows: repeat(100, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}

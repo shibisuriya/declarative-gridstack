@@ -1,8 +1,14 @@
 .widget {
-  background-color: red;
+  background-color: #b39cd0;
   height: 100%;
   display: flex;
   justify-content: center;
+  color: black;
   align-items: center;
   text-align: center;
+  padding: 10px;
+}
+
+:global(.grid-stack) {
+  background-color: #fbeaff;
 }

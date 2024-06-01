@@ -1,6 +1,6 @@
-# Simple grid
+# A simple example
 
-A simple grid container
+A `Gridstack container` with one `Gridstack item` in it.
 
 <div ref="el"></div>
 
@@ -8,7 +8,7 @@ A simple grid container
 import { createElement } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ref, onMounted } from 'vue'
-import Simple from '../../../components/react/simple/Simple.jsx'
+import Simple from '../../../components/react/Simple.jsx'
 
 const el = ref()
 onMounted(() => {

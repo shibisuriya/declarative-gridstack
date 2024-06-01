@@ -22,7 +22,7 @@ Press the `Update width` button and see the layout change.
 import { createElement } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ref, onMounted } from 'vue'
-import UpdatingDimensions from '../../../components/react/apis/UpdatingDimensions.jsx'
+import UpdatingDimensions from '../../../components/react/UpdatingDimensions.jsx'
 
 const el = ref()
 onMounted(() => {

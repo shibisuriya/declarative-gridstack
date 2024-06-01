@@ -3,13 +3,17 @@
 If you have a React application scaffolded with CRA (create-react-app), it is recommended to remove the <React.StrictMode> component from the index.js file.
 
 ```jsx
-<React.StrictMode>
-  <App />
-</React.StrictMode>
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 ```
 
-with
+To,
 
 ```jsx
-<App />
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
 ```

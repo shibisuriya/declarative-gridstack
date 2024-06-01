@@ -84,6 +84,8 @@ export default {
       noResize: this.noResize,
       minW: this.minW,
       maxW: this.maxW,
+      minH: this.minH,
+      maxH: this.maxH
     });
     console.log("GridItem created, _uid = ", this._uid);
     this.$nextTick(() => {

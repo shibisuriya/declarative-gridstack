@@ -8,12 +8,12 @@ outline: deep
 
 ### What are DND items?
 
-DND (drag and drop) items are html elements (gridstack items that resides out of
-a gridstack grid) that could be dragged and dropped into a gridstack grid.
+DND (drag and drop) items are html elements (Gridstack Items that are not in a Gridstack Grid)
+that could be dragged and dropped into a Gridstack Grid.
 
 ### How are DND items different from normal html elements?
 
-DND items are normal html elements that have the class 'grid-stack-item' in the outer tag and 'grid-stack-item-content' in the inner tag. To ensure proper identification of the items in the DOM, each outer element should also have a unique class ('gs-dnd-item' in the example below) and a 'gs-dnd-item-id' attribute with a unique value. The example below shows two unique DND items:
+DND items are normal html elements that have the class `grid-stack-item` in the outer tag and `grid-stack-item-content` in the inner tag. To ensure proper identification of the items in the DOM, each outer element should also have a unique class ('gs-dnd-item' in the example below) and a 'gs-dnd-item-id' attribute with a unique value. The example below shows two unique DND items:
 
 ```html
 <div class="gs-dnd-item grid-stack-item" gs-dnd-item-id="-1">

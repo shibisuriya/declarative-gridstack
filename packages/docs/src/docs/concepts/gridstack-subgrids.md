@@ -4,10 +4,14 @@ outline: deep
 
 # What are Gridstack Subgrids?
 
-Each subgrid is itself a Gridstack item that has a Gridstack container within it. This container can hold other Gridstack items, allowing for more complex and nested layouts.
+Each subgrid is itself a [Gridstack item](./gridstack-items.md) that has a [Gridstack Grid](./gridstack-grids.md) within it, the grid can further hold other Gridstack items, allowing for more complex and nested layouts.
 
-```jsx
-const [subgridLayout, setSubgridLayout] = useState([
+::: info
+The root level Gridstack Grid is called the `Master Grid`.
+:::
+
+```json
+[
   {
     id: 2,
     x: 3,
@@ -37,7 +41,11 @@ const [subgridLayout, setSubgridLayout] = useState([
       },
     ],
   },
-]);
+];
 ```
 
-Based on the model provided above, the layout can be described as having a master container that includes a Gridstack item that serves as a subgrid. This subgrid, in turn, contains two additional Gridstack items.
+The array given above represents a Master grid that has one Subgrid inside it, the subgrid further has 2 items inside it.
+
+::: warning
+The property `children` in an object that represents a Gridstack Item makes it a Gridstack Subgrid. The property `children` is a reserved property and must not be used for other purposes.
+:::
