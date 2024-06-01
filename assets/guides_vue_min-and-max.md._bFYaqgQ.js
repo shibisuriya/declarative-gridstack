@@ -1,0 +1,1 @@
+import{_ as e,c as a,o as t}from"./chunks/framework.DL4PdOA6.js";const _=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"guides/vue/min-and-max.md","filePath":"guides/vue/min-and-max.md"}'),n={name:"guides/vue/min-and-max.md"};function s(r,d,i,o,m,c){return t(),a("div")}const u=e(n,[["render",s]]);export{_ as __pageData,u as default};

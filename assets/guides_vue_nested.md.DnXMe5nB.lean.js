@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as s}from"./chunks/framework.DL4PdOA6.js";const u=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"guides/vue/nested.md","filePath":"guides/vue/nested.md"}'),a={name:"guides/vue/nested.md"};function n(r,d,o,c,i,p){return s(),t("div")}const m=e(a,[["render",n]]);export{u as __pageData,m as default};

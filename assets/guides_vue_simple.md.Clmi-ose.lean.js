@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as s}from"./chunks/framework.DL4PdOA6.js";const l=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"guides/vue/simple.md","filePath":"guides/vue/simple.md"}'),a={name:"guides/vue/simple.md"};function r(i,o,c,n,p,d){return s(),t("div")}const _=e(a,[["render",r]]);export{l as __pageData,_ as default};
